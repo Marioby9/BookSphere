@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+#colorPalette{
+    color: #1db954;
+    color: #1ed760;
+    color: #89ac76;
+    color: #ffffff;
+    color: #191414;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    list-style: none;
+    font-family: 'Outfit', sans-serif;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    background-color: #191414;
+    
+}
+
+main{
+    color: white;
+    flex-direction: column;
+    gap: 20px;
+}
+
+header{
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    font-size: larger;
+}
+
+.buttons{
+    flex-direction: column;
+    gap: 20px;
+    
+}
+.btnLogin{
+    background-color: #1ed760;
+    border-radius: 30px;
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    color: #191414;
+    padding: 10px;
+    width: 200px;
+    transition: .5s;
+}
+.btnLogin:hover{
+    background-color: #89ac76;
+    transform: scale(1.05);
+}
+
+.btnSignUp{
+    color: #ffffff;
+}
+.btnSignUp a{
+    color: #ffffff;
+    font-weight: bold;
+    transition: .5s;
+}
+.btnSignUp a:hover{
+    text-decoration: underline;
+}
+
+
+.socialMedia{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 20px;
+}
+
+.btnRed{
+    gap: 10px;
+    background-color: #ffffff;
+    color: #191414;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: larger;
+    transition: .5s;
+}
+
+.btnRed:hover{
+    transform: scale(1.05);
+}
+
+
+
+
+
+
+
+
+.overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #191414;
+    opacity: 70%;
+    z-index: -1;
+}
+
+.overlayImg{
+    filter: grayscale(100%);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: right;
+    background-size: cover;
+    z-index: -1;
+}
+
