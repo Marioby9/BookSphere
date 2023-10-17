@@ -9,27 +9,41 @@
     <title>BookSphere</title>
 </head>
 <body class="center">
-    <img class="logo" src="../../public/img/logos/fullWhiteLogo.png" alt="logo">
-    <main class="center" id="login">
+    <main class="center">
         <header class="center">
             <h1>¡Bienvenido!</h1>
-            <h3>Inicia sesión para empezar a usar BookSphere</h3>
+            <h3>Regístrate para empezar a usar BookSphere</h3>
         </header>
         <form class="center" action="" method="post" id="form">
             <div class="field">
+                <input type="text" name="" placeholder="nombre" required>
+            </div>
+            <div class="field">
+                <input type="text" name="" placeholder="apellido 1" required>
+            </div>
+            <div class="field">
+                <input type="text" name="" placeholder="apellido 2" required>
+            </div>
+            
+            <div class="field">
                 <input type="text" name="" placeholder="username" required>
+            </div>
+            <div class="field">
+                <input type="email" name="" placeholder="email" required>
             </div>
             <div class="field">
                 <input type="password" name="" id="password" placeholder="contraseña" required>
                 <i class="eye fa-solid fa-eye"></i>
             </div>
+            <div class="field">
+                <input type="password" name="" id="confPassword" placeholder="confirmar contraseña" required>
+            </div>
             <br>
-            <input class="submit" type="submit" value="LogIn">
+            <input class="submit" type="submit" value="SignUp">
         </form>
-        
-        
-        <p>¿Aún no tienes una cuenta? <a class="back" href="../auth/signup.html">Regístrate</a></p>
 
+        
+        <p>¿Ya tienes una cuenta? <a class="back" href="../auth/login.html">Inicia Sesión</a></p>
         <div class="socialMedia">
             <a class="btnRed center" href="https://github.com/Marioby9/BookSphere" target="_blank">
                 <i class="fa-brands fa-github"></i>
@@ -37,10 +51,12 @@
             </a>
         </div>
     </main>
+    <img class="logo" src="../../public/img/logos/fullWhiteLogo.png" alt="logo">
+
 
     <img class="overlayImg" src="../../public/img/overlay.jpeg" alt="background">
     <div class="overlay"></div>
 
-    <script type="module" src="../../public/js/login.js"></script>
+    <script type="module" src="../../public/js/signup.js"></script>
 </body>
 </html>

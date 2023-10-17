@@ -27,54 +27,81 @@ body{
     width: 100%;
     height: 100vh;
     background-color: #191414;
+    color: white;
+    gap: 30px;
 }
 
 main{
-    color: white;
     flex-direction: column;
-    gap: 20px;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.845);
+    gap: 40px;
+    border-radius: 30px;
+    height: 80%;
+}
+
+main#login{
+    gap: 80px;
 }
 
 header{
     flex-direction: column;
-    gap: 20px;
-    text-align: center;
-    font-size: larger;
 }
 
-.buttons{
+form{
     flex-direction: column;
-    gap: 20px;
+    gap: 8px;
+    width: 250px;
+}
+.field{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 2px;
+    background-color: #ffffff;
+    border-radius: 30px;
+    padding: 5px;
+}
+.field input{
+    background-color: #ffffff;
+    padding: 5px;
+    border: none;
+    font-size: medium;
+}
+
+.field input:focus{
+    outline: none;
+}
+
+.submit{
+    font-weight: bold;
+    background-color: #1ed760;
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+    font-size: medium;
+    transition: .5s;
     
 }
-.btnLogin{
-    background-color: #1ed760;
-    border-radius: 30px;
-    text-align: center;
-    font-size: larger;
+.submit:focus{
     font-weight: bold;
-    color: #191414;
-    padding: 10px;
-    width: 200px;
-    transition: .5s;
+    outline: none;
 }
-.btnLogin:hover{
+
+.submit:hover{
     background-color: #89ac76;
     transform: scale(1.05);
 }
 
-.btnSignUp{
-    color: #ffffff;
-}
-.btnSignUp a{
-    color: #ffffff;
-    font-weight: bold;
+
+.back{
+    text-decoration: none;
+    color: white;
     transition: .5s;
 }
-.btnSignUp a:hover{
+.back:hover{
     text-decoration: underline;
 }
-
 
 .socialMedia{
     position: absolute;
@@ -96,6 +123,28 @@ header{
 .btnRed:hover{
     transform: scale(1.05);
 }
+
+.logo{
+    width: 40%;
+}
+
+.eye{
+    color: black;
+}
+
+
+
+
+
+@media (max-width: 900px){
+    .logo{
+        display: none;
+    }
+    .socialMedia{
+        display: none;
+    }
+}
+
 
 
 
