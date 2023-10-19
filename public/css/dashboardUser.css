@@ -2,11 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 #colorPalette{
+    color: #144d27;
     color: #1db954;
     color: #1ed760;
     color: #89ac76;
     color: #ffffff;
     color: #191414;
+    color: rgba(0, 0, 0, 0.845);
+    color: #0a31178f;
 }
 
 *{
@@ -32,7 +35,7 @@ body{
 
 .page{
     height: 100%;
-    width: 75%;
+    width: 73%;
 }
 
 /*HEADER*/
@@ -42,10 +45,12 @@ header{
     display: flex;
     align-items: center;
     padding-right: 20px;
+    padding-left: 5px;
     height: 120px;
     max-width: 100%;
     gap: 150px;
     margin-bottom: 50px;
+    background-color: #0a31178f;
 }
 
 .logo{
@@ -54,28 +59,244 @@ header{
 
 .menu{
     width: 100%;
+    
 }
 .menu ul{
     display: flex;
     width: 100%;
     justify-content: space-around;
 }
+.menu ul li{
+    padding: 5px 10px;
+}
+.menu ul li a{
+    color: #ffffff;
+}
+.menu ul li a:hover{
+    cursor: pointer;
+    border-top: 3px solid #1db954;
+    border-bottom: 3px solid #1db954;
+}
 
 
 /*MAIN SECTION*/
+main{
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+.left{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 60%;
+    height: fit-content;
+}
 .sectionTitle{
-    font-size: larger;
+    font-size: x-large;
     font-weight: 600;
 }
 
 .lastLoans{
-    width: 70%;
-    height: 500px;  
+    height: fit-content;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.845);
+    gap: 40px;
+    border-radius: 30px;
+    
 }
+
+
+.books{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+}
+
+.book{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 10px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+.book:hover{
+    background-color: #144d27 ;
+    cursor: pointer;
+    .bookIcon{
+        transform: scale(1.1);
+    }
+}
+
+.data{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.bookIcon{
+    font-size: xxx-large;
+    transition: 0.5s;
+}
+.book .bottom{
+    font-weight: lighter;
+    opacity: 0.95;
+    display: flex;
+    gap: 20px;
+}
+
+
+
+/*LAST NEWS*/
+
+.lastNews{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.845);
+    gap: 20px;
+    border-radius: 30px;
+}
+
+.slide{
+    display: none;
+}
+.slide.active{
+    display: flex;
+}
+
+.sliders{
+    position: relative;
+}
+
+.sliders i{
+    font-size: xx-large;
+}
+
+.bNext{
+    right: -20px;
+}
+.bPrev{
+    left: -20px;
+}
+
+.bSlide{
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transition: transform .3s;
+    background-color: black;
+    border-radius: 100%;
+    color: #1ed760;
+}
+.bSlide:hover{
+    transform: scale(1.3);
+}
+
+.new{
+    display: flex;
+    width: 100%;
+    height: 300px;
+    background-color: #ffffff91;
+    border-radius: 30px;
+    
+}
+
+.newContent{
+    width: 60%;
+    color: black;
+    padding: 20px;
+    flex-direction: column;
+    gap: 30px;
+}
+.cover{
+    width: 40%;
+    border-radius: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*RIGHT SIDE*/
+.right{
+    width: 35%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
 .aside{
-    width: 30%;
-    height: 500px;
+    height: 580px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.845);
+    gap: 20px;
+    border-radius: 30px;
 }
+
+.topBookCard{
+    display: flex;
+    background-color: #ffffff91;
+    height: 150px;
+    padding: 5px;
+    border-radius: 20px;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.topBookCard:hover{
+    box-shadow: #1db954 0px 0px 5px 5px;
+}
+
+.topBookCover{
+    width: 40%;
+    border-radius: 20px;
+}
+.topBookContent{
+    color: black;
+    gap: 10px;
+    width: 50%;
+    flex-direction: column;
+}
+
+
+.colaborations{
+    color: black;
+    flex-direction: column;
+    height: fit-content;
+    padding: 40px;
+    background-color: #ffffff8f;
+    gap: 20px;
+    border-radius: 30px;
+}
+.colaborations .btnRed{
+    background-color: #191414;
+    color: white;
+}
+
+.colaborations .options{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.row{
+    display: flex;
+    gap: 10px;
+}
+
+
 
 
 
@@ -83,11 +304,12 @@ header{
 /*FOOTER*/
 footer{
     font-size: large;
-    background-color: #191424;
     max-width: 100%;
     height: 120px;
     flex-direction: column;
     padding: 10px;
+    border-top: 2px solid #ffffff;
+    margin-top: 50px;
 }
 .socialMedia{
     padding: 20px;
@@ -108,3 +330,36 @@ footer{
 .btnRed:hover{
     transform: scale(1.05);
 }
+
+
+
+
+/*OVERLAY*/
+.overlay {
+    position: fixed; 
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #191414;
+    opacity: 0.7; 
+    z-index: -1;
+}
+
+.overlayImg {
+    filter: grayscale(100%);
+    position: fixed; 
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: right;
+    background-size: cover;
+    z-index: -2; 
+}
+
+
+
+
+
+

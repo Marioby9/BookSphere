@@ -2,11 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 #colorPalette{
+    color: #144d27;
     color: #1db954;
     color: #1ed760;
     color: #89ac76;
     color: #ffffff;
     color: #191414;
+    color: rgba(0, 0, 0, 0.845);
+    color: #0a31178f;
 }
 
 *{
@@ -27,60 +30,74 @@ body{
     width: 100%;
     height: 100vh;
     background-color: #191414;
+    color: white;
 }
 
-main{
-    color: white;
-    flex-direction: column;
-    gap: 20px;
+.page{
+    height: 100%;
+    width: 73%;
 }
+
+/*HEADER*/
 
 header{
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
-    font-size: larger;
+    font-size: large;
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+    padding-left: 5px;
+    height: 120px;
+    max-width: 100%;
+    gap: 150px;
+    margin-bottom: 50px;
+    background-color: #0a31178f;
 }
 
-.buttons{
-    flex-direction: column;
-    gap: 20px;
+.logo{
+    height: 60px;
+}
+
+.menu{
+    width: 100%;
     
 }
-.btnLogin{
-    background-color: #1ed760;
-    border-radius: 30px;
-    text-align: center;
-    font-size: larger;
-    font-weight: bold;
-    color: #191414;
+.menu ul{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+.menu ul li{
+    padding: 5px 10px;
+}
+.menu ul li a{
+    color: #ffffff;
+}
+.menu ul li a:hover{
+    cursor: pointer;
+    border-top: 3px solid #1db954;
+    border-bottom: 3px solid #1db954;
+}
+
+
+
+
+
+
+
+/*FOOTER*/
+footer{
+    font-size: large;
+    max-width: 100%;
+    height: 120px;
+    flex-direction: column;
     padding: 10px;
-    width: 200px;
-    transition: .5s;
+    border-top: 2px solid #ffffff;
+    margin-top: 50px;
 }
-.btnLogin:hover{
-    background-color: #89ac76;
-    transform: scale(1.05);
-}
-
-.btnSignUp{
-    color: #ffffff;
-}
-.btnSignUp a{
-    color: #ffffff;
-    font-weight: bold;
-    transition: .5s;
-}
-.btnSignUp a:hover{
-    text-decoration: underline;
-}
-
-
 .socialMedia{
-    position: absolute;
-    top: 0;
-    right: 0;
     padding: 20px;
+    display: flex;
+    gap: 20px;
 }
 
 .btnRed{
@@ -100,28 +117,29 @@ header{
 
 
 
-
-
-.overlay{
-    position: absolute;
+/*OVERLAY*/
+.overlay {
+    position: fixed; 
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
     background-color: #191414;
-    opacity: 70%;
+    opacity: 0.7; 
     z-index: -1;
 }
 
-.overlayImg{
+.overlayImg {
     filter: grayscale(100%);
-    position: absolute;
+    position: fixed; 
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
     background: right;
     background-size: cover;
-    z-index: -1;
+    z-index: -2; 
 }
+
+
 
