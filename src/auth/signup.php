@@ -1,3 +1,22 @@
+<?php
+include_once "../models/DB.php";
+
+if (isset($_POST["signup"])) {
+    $name = $_POST["name"]; 
+    $ape1 = $_POST["ape1"]; 
+    $ape2 = $_POST["ape2"]; 
+    $username = $_POST["username"]; 
+    $email = $_POST["email"];
+    $password = $_POST["pass"];
+
+    
+    $inserted = insertUser($name, $ape1, $ape2, $username, $email, $password);
+    echo ($inserted ? "Insertado" : "No insertado");    
+}
+    
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,32 +33,32 @@
             <h1>¡Bienvenido!</h1>
             <h3>Regístrate para empezar a usar BookSphere</h3>
         </header>
-        <form class="center" action="" method="post" id="form">
+        <form class="center" action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" id="form">
             <div class="field">
-                <input type="text" name="" placeholder="nombre" required>
+                <input type="text" name="name" placeholder="nombre" required>
             </div>
             <div class="field">
-                <input type="text" name="" placeholder="apellido 1" required>
+                <input type="text" name="ape1" placeholder="apellido 1" required>
             </div>
             <div class="field">
-                <input type="text" name="" placeholder="apellido 2" required>
+                <input type="text" name="ape2" placeholder="apellido 2" required>
             </div>
             
             <div class="field">
-                <input type="text" name="" placeholder="username" required>
+                <input type="text" name="username" placeholder="username" required>
             </div>
             <div class="field">
-                <input type="email" name="" placeholder="email" required>
+                <input type="email" name="email" placeholder="email" required>
             </div>
             <div class="field">
-                <input type="password" name="" id="password" placeholder="contraseña" required>
+                <input type="password" name="pass" id="password" placeholder="contraseña" required>
                 <i class="eye fa-solid fa-eye"></i>
             </div>
             <div class="field">
-                <input type="password" name="" id="confPassword" placeholder="confirmar contraseña" required>
+                <input type="password" name="confPass" id="confPassword" placeholder="confirmar contraseña" required>
             </div>
             <br>
-            <input class="submit" type="submit" value="SignUp">
+            <input class="submit" type="submit" name="signup" value="SignUp">
         </form>
 
         

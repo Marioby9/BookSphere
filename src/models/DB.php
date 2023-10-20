@@ -1,58 +1,50 @@
 <?php  
-    
-    include_once "./configDB.php";
-    $myConnection;
+    include_once "../models/configDB.php";
 
 
     function connect(){
-        $myConnection = mysqli_connect(HOST, USER_DB, PASSWORD_DB, NAME_DB);
-        return mysqli_connect_errno() ? false : true;
+        return mysqli_connect(HOST, USER_DB, PASSWORD_DB, NAME_DB); 
     }
     
-    function close(){
+    function close($myConnection){
         return mysqli_close($myConnection);
     }
 
-    function insertUser($pName, $pLast1, $pLast2, $pNickname, $pEmail, $pPassword, $pRol){
-        connect();
-        $inserted = mysqli_query($myConnection, "INSERT INTO user (name, lastname1, lastname2, nickname, email, password, rol) VALUES ('" . $pName . "', '" . $pLast1 . "', '" . $pLast2 . "', '" . $pNickname . "', '" . $pEmail . "', '" . $pPassword . "', '" . $pRol . "' );");
-        
-        //ALMACENAR RESULTADO EN VARIABLE AUXILIAR
-        //LIBERAR RESULTADO
-        //CERRAR CONEXION
-        //RETORNAR AUXILIAR
-
+    function insertUser($pName, $pLast1, $pLast2, $pNickname, $pEmail, $pPassword, $pRol = "user"){
+        $myConnection = connect();
+        $inserted = mysqli_query($myConnection, "INSERT INTO user (name, lastname1, lastname2, nickname, email, password, rol) VALUES ('" . $pName . "', '" . $pLast1 . "', '" . $pLast2 . "', '" . $pNickname . "', '" . $pEmail . "', '" . $pPassword . "','". $pRol . "' );");
+        close($myConnection);
         return $inserted;
     }
 
     function getUser($pNickname, $pPassword){
-        connect();
-        $user = mysqli_query($mysqli, "SELECT * FROM user WHERE nickname == '. $pNickname .' && password == '. $pPassword .' ");
-
+        $myConnection = connect();
+        $user = mysqli_query($myConnection, "SELECT * FROM user WHERE nickname == '. $pNickname .' && password == '. $pPassword .' ");
+        close($myConnection);
         return $user;
     }
 
     function getUserLoans($pID){
-        connect();
+        $myConnection = connect();
         $userLoans = mysqli_query($myConnection, "SELECT * FROM loan WHERE id_user == $pID");
         $arrayLoans = mysqli_fetch_all($userLoans);
-
+        close($myConnection);
         return $arrayLoans;
     }
 
     function getNumOfLoans($pID){
-        connect();
+        $myConnection = connect();
         $numOfLoans = mysqli_query($myConnection, "SELECT COUNT(*) FROM loan WHERE id_user == $pID");
-
+        close($myConnection);
         return $numOfLoans;
     }
     
 
     function getAllUsers(){
-        connect();
+        $myConnection = connect();
         $users = mysqli_query($myConnection, "SELECT * FROM user");
         $arrayUsers = mysqli_fetch_all($users);
-
+        close($myConnection);
         return $arrayUsers;
     }
 
@@ -64,8 +56,6 @@
     }*/
 
     //SENTENCIAS PREPARADAS
-
-    if(connect()) echo "CONECTADO";
 
 
 

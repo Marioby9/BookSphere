@@ -14,6 +14,3 @@ $eye.addEventListener("click", () => {
     }
 })
 
-$form.addEventListener("submit", (event) => {
-    event.preventDefault()
-})
