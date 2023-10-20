@@ -43,7 +43,7 @@
         </form>
 
         
-        <p>¿Ya tienes una cuenta? <a class="back" href="../auth/login.html">Inicia Sesión</a></p>
+        <p>¿Ya tienes una cuenta? <a class="back" href="../auth/login.php">Inicia Sesión</a></p>
         <div class="socialMedia">
             <a class="btnRed center" href="https://github.com/Marioby9/BookSphere" target="_blank">
                 <i class="fa-brands fa-github"></i>

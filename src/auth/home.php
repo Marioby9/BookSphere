@@ -16,8 +16,8 @@
         </header>
         <hr>
         <div class="buttons center">
-            <a class="btnLogin" href="../auth/login.html" rel="noopener noreferrer">Iniciar Sesión</a>
-            <p class="btnSignUp"> ¿Aún no tienes una cuenta?. <a href="../auth/signup.html" rel="noopener noreferrer">Regístrate</a> </p>
+            <a class="btnLogin" href="../auth/login.php" rel="noopener noreferrer">Iniciar Sesión</a>
+            <p class="btnSignUp"> ¿Aún no tienes una cuenta?. <a href="../auth/signup.php" rel="noopener noreferrer">Regístrate</a> </p>
         </div>
         
     </main>

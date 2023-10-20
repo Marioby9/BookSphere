@@ -28,7 +28,7 @@
         </form>
         
         
-        <p>¿Aún no tienes una cuenta? <a class="back" href="../auth/signup.html">Regístrate</a></p>
+        <p>¿Aún no tienes una cuenta? <a class="back" href="../auth/signup.php">Regístrate</a></p>
 
         <div class="socialMedia">
             <a class="btnRed center" href="https://github.com/Marioby9/BookSphere" target="_blank">

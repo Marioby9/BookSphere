@@ -15,9 +15,9 @@
             <nav class="menu">
                 <ul>
                     <li><a href="#">Página Principal</a></li>
-                    <li><a href="./catalogo.html">Catálogo</a></li>
-                    <li><a href="./userBooks.html">Mis Libros</a></li>
-                    <li><a href="./user.html">Perfil</a></li>
+                    <li><a href="./catalogo.php">Catálogo</a></li>
+                    <li><a href="./userBooks.php">Mis Libros</a></li>
+                    <li><a href="./user.php">Perfil</a></li>
                 </ul>
             </nav>
         </header>

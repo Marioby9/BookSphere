@@ -1,14 +1,11 @@
 <?php  
     
-    $host = "localhost";
-    $userDB = "booksphere";
-    $passwordDB = "booksphere";
-    $nameDB = "booksphere";
+    include_once "./configDB.php";
     $myConnection;
 
 
     function connect(){
-        $myConnection = mysqli_connect($host, $userDB, $passwordDB, $nameDB);
+        $myConnection = mysqli_connect(HOST, USER_DB, PASSWORD_DB, NAME_DB);
         return mysqli_connect_errno() ? false : true;
     }
     
@@ -67,5 +64,9 @@
     }*/
 
     //SENTENCIAS PREPARADAS
+
+    if(connect()) echo "CONECTADO";
+
+
 
 ?>
