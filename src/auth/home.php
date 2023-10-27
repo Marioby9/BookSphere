@@ -28,8 +28,6 @@
             <p>Ver Proyecto</p>
         </a>
     </div>
-    
-    <img class="overlayImg" src="../../public/img/overlay.jpeg" alt="background">
-    <div class="overlay"></div>
+    <?php include_once "../components/overlay.inc.php"; ?> 
 </body>
 </html>

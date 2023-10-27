@@ -38,8 +38,7 @@
         </div>
     </main>
 
-    <img class="overlayImg" src="../../public/img/overlay.jpeg" alt="background">
-    <div class="overlay"></div>
+    <?php include_once "../components/overlay.inc.php"; ?> 
 
     <script type="module" src="../../public/js/login.js"></script>
 </body>
