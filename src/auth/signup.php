@@ -9,9 +9,8 @@ if (isset($_POST["signup"])) {
     $email = $_POST["email"];
     $password = $_POST["pass"];
 
-    
-    $inserted = insertUser($name, $ape1, $ape2, $username, $email, $password);
-    echo ($inserted ? "Insertado" : "No insertado");    
+    DB::connect();
+    $inserted = DB::insertUser($name, $ape1, $ape2, $username, $email, $password);   
 }
     
 ?>

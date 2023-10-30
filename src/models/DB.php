@@ -1,52 +1,58 @@
 <?php  
     include_once "../models/configDB.php";
+    class DB{
 
+        private static $myConnection = null;
 
-    function connect(){
-        return mysqli_connect(HOST, USER_DB, PASSWORD_DB, NAME_DB); 
-    }
+        //
+
+        public static function connect(){
+            try {
+                self::$myConnection = mysqli_connect(HOST, USER_DB, PASSWORD_DB, NAME_DB); 
+                return true;
+            } catch (\Throwable $th) {
+                return false;
+            }
+        }
+        
+
+        public static function close(){
+            return mysqli_close(self::$myConnection);
+        }
+
     
-    function close($myConnection){
-        return mysqli_close($myConnection);
-    }
+        public static function insertUser($pName, $pLast1, $pLast2, $pNickname, $pEmail, $pPassword, $pRol = "user"){
+            return mysqli_query(self::$myConnection, "INSERT INTO user (name, lastname1, lastname2, nickname, email, password, rol) VALUES ('" . $pName . "', '" . $pLast1 . "', '" . $pLast2 . "', '" . $pNickname . "', '" . $pEmail . "', '" . $pPassword . "','". $pRol . "' );");
+        }
 
-    function insertUser($pName, $pLast1, $pLast2, $pNickname, $pEmail, $pPassword, $pRol = "user"){
-        $myConnection = connect();
-        $inserted = mysqli_query($myConnection, "INSERT INTO user (name, lastname1, lastname2, nickname, email, password, rol) VALUES ('" . $pName . "', '" . $pLast1 . "', '" . $pLast2 . "', '" . $pNickname . "', '" . $pEmail . "', '" . $pPassword . "','". $pRol . "' );");
-        close($myConnection);
-        return $inserted;
-    }
 
-    function getUser($pNickname, $pPassword){
-        $myConnection = connect();
-        $user = mysqli_query($myConnection, "SELECT * FROM user WHERE nickname == '. $pNickname .' && password == '. $pPassword .' ");
-        close($myConnection);
-        return $user;
-    }
+        public static function getUser($pNickname, $pPassword){
+            return mysqli_query(self::$myConnection, "SELECT * FROM user WHERE nickname == '. $pNickname .' && password == '. $pPassword .' ");
+        }
 
-    function getUserLoans($pID){
-        $myConnection = connect();
-        $userLoans = mysqli_query($myConnection, "SELECT * FROM loan WHERE id_user == $pID");
-        $arrayLoans = mysqli_fetch_all($userLoans);
-        close($myConnection);
-        return $arrayLoans;
-    }
 
-    function getNumOfLoans($pID){
-        $myConnection = connect();
-        $numOfLoans = mysqli_query($myConnection, "SELECT COUNT(*) FROM loan WHERE id_user == $pID");
-        close($myConnection);
-        return $numOfLoans;
-    }
+        public static function getUserLoans($pID){
+            $userLoans = mysqli_query(self::$myConnection, "SELECT * FROM loan WHERE id_user == $pID");
+            return mysqli_fetch_all($userLoans);
+        }
+
+
+        public static function getNumOfLoans($pID){
+            return mysqli_query(self::$myConnection, "SELECT COUNT(*) FROM loan WHERE id_user == $pID");
+        }
+
+
+        public static function getAllUsers(){
+            $users = mysqli_query(self::$myConnection, "SELECT * FROM user");
+            return mysqli_fetch_all($users);
+        }
     
 
-    function getAllUsers(){
-        $myConnection = connect();
-        $users = mysqli_query($myConnection, "SELECT * FROM user");
-        $arrayUsers = mysqli_fetch_all($users);
-        close($myConnection);
-        return $arrayUsers;
+
+
     }
+
+
 
 
     /*ARRAY ASOCIATIVOS:

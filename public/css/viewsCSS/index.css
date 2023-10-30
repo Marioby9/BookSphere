@@ -12,4 +12,28 @@
     color: #0a31178f;
 }
 
+*{
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    list-style: none;
+    font-family: 'Outfit', sans-serif;
+}
 
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    background-color: #191414;
+    color: white;
+}
+
+.page{
+    height: 100%;
+    width: 73%;
+}
