@@ -30,8 +30,8 @@ header{
 .menu ul li a{
     color: #ffffff;
 }
-.menu ul li a:hover{
+.menu ul a:hover{
     cursor: pointer;
-    border-top: 3px solid #1db954;
+    border-top: 3px solid #1db954; 
     border-bottom: 3px solid #1db954;
 }

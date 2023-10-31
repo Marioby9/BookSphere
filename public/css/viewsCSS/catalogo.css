@@ -12,6 +12,11 @@
     color: #0a31178f;
 }
 
+main{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
 
 .search{
     display: flex;
@@ -88,4 +93,59 @@
 .avanzada i{
     font-size: large;
     color: #ffffff;
+}
+
+
+
+
+.booksCont{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+    min-height: 200px;
+    max-height: fit-content;
+    padding: 40px 10px;
+    background-color: rgba(0, 0, 0, 0.845);
+    gap: 40px;
+    border-radius: 30px;
+}
+
+.rowNames{
+    width: 100%;
+    display: flex;
+}
+.rowNames p{
+    font-weight: 600;
+    font-size: x-large;
+    width: 100%;
+    text-align: center;
+}
+
+.books{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.book{
+    font-weight: 400;
+    width: 100%;
+    display: flex;
+    padding: 20px 0;
+    border-radius: 10px;
+    transition: all .1s;
+}
+.book:hover{
+    background-color: #144d27 ;
+    cursor: pointer;
+}
+.book p{
+    text-align: center;
+    width: 100%;
+}
+
+p.available{
+    width: 70%;
 }
