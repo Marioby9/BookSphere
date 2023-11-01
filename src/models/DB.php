@@ -55,7 +55,7 @@
         public static function getBookByColumn($column, $value){
             self::connect();
             $arrayBooks = array();
-            $result = mysqli_query(self::$myConnection, "SELECT * FROM book WHERE $column = '$value'");
+            $result = mysqli_query(self::$myConnection, "SELECT * FROM book WHERE UPPER($column) LIKE UPPER('%$value%')");
 
             while($book = mysqli_fetch_assoc($result)){
                 $arrayBooks[] = $book;

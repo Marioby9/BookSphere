@@ -24,9 +24,9 @@
             </select>
             <div class="field">
                 <input type="text" name="keyword" id="password" placeholder="Introduce las palabras clave">
-                <i class="fa-solid fa-magnifying-glass searchButton" onclick="submitForm()"></i>
+                <i class="fa-solid fa-magnifying-glass searchButton" id="bSimpleSearch""></i>
             </div>
-            <div class="avanzada">
+            <div class="avanzada" id="bAdvSearch">
                 <p>Búsqueda avanzada</p>
                 <i class="fa-solid fa-filter"></i>
             </div>
@@ -55,11 +55,17 @@
             <?php } ?>
         </div>
     </div>
+    
+    <div class="modal">
+        <div class="outside"></div>
+        <div class="advSearchCont">
+                <h3>Búsqueda avanzada</h3>
+                <form action="<?php echo $_SERVER["PHP_SELF"]."?ruta=catalogo"; ?>" method="post" id="advForm">
+                    
+                </form>
+        </div>
+    </div>
 
-    <script>
-            function submitForm() {
-                document.getElementById("form").submit();
-            }
-    </script>
+    <script src="./public/js/catalogo.js"></script>
 
 </main>
