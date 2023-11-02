@@ -12,7 +12,7 @@
 
 <main>
     <link rel="stylesheet" href="./public/css/viewsCSS/catalogo.css">
-    <form id="form" action="<?php echo $_SERVER["PHP_SELF"]."?ruta=catalogo"; ?>" method="post">
+    <form id="simpleForm" action="<?php echo $_SERVER["PHP_SELF"]."?ruta=catalogo"; ?>" method="post">
         <div class="search">
             <p>Flitrar por:</p>
             <select name="filter" id="">
@@ -44,14 +44,14 @@
         <hr>
         <div class="books">
             <?php foreach ($books as $book) {?>
-                <div class="book">
+                <a href="?ruta=singleBook" class="book">
                         <p><?php echo $book["title"]; ?></p>
                         <p><?php echo $book["author"]; ?></p>
                         <p><?php echo $book["publisher"]; ?></p>
                         <p><?php echo $book["language"]; ?></p>
                         <p><?php echo $book["genre"]; ?></p>
                         <p class="available"><?php echo $book["available"]; ?></p>
-                </div>
+                </a>
             <?php } ?>
         </div>
     </div>
@@ -61,8 +61,36 @@
         <div class="advSearchCont">
                 <h3>Búsqueda avanzada</h3>
                 <form action="<?php echo $_SERVER["PHP_SELF"]."?ruta=catalogo"; ?>" method="post" id="advForm">
-                    
+                    <div class="advColumn">
+                        <div class="field advField">
+                            <i class="fa-solid fa-hashtag icon"></i>
+                            <input type="text" placeholder="ISBN">
+                        </div>
+                        <div class="field advField">
+                            <i class="fa-solid fa-user icon"></i>
+                            <input type="text" placeholder="Autor">
+                        </div>
+                        <div class="field advField">
+                            <i class="fa-solid fa-feather icon"></i>
+                            <input type="text" placeholder="Editorial">
+                        </div>
+                    </div>
+                    <div class="advColumn">
+                        <div class="field advField">
+                            <i class="fa-solid fa-book icon"></i>
+                            <input type="text" placeholder="Título">
+                        </div>
+                        <div class="field advField">
+                            <i class="fa-solid fa-masks-theater icon"></i>
+                            <input type="text" placeholder="Género">
+                        </div>
+                        <div class="field advField">
+                            <i class="fa-solid fa-calendar-days icon"></i>
+                            <input type="text" placeholder="Año Publicación">
+                        </div>
+                    </div>
                 </form>
+                <button>Enviar Búsqueda</button>
         </div>
     </div>
 

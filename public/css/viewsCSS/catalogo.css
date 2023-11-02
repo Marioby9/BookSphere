@@ -129,8 +129,24 @@ main{
     gap: 10px;
     overflow-y: scroll;
 }
+.books{
+    &::-webkit-scrollbar {
+        width: 12px; 
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #144d27; 
+        border-radius: 5px; 
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: #fff;
+        border-radius: 5px;
+    }
+}
 
 .book{
+    color: #ffffff;
     font-weight: 400;
     width: 100%;
     display: flex;
@@ -173,19 +189,20 @@ p.available{
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 30px;
+    gap: 50px;
 
-    color: #000;
+    color: #ffffff;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #144d27;
     width: 700px; 
-    height: 500px; 
+    height: 450px; 
     z-index: 1; 
     border-radius: 30px;
     padding: 20px;
+    box-shadow: 0 0 15px #ffffff;
 }
 
 .advSearchCont h3{
@@ -197,6 +214,50 @@ p.available{
 
 
 #advForm{
+    display: flex;
     width: 100%;
+}
+
+.advColumn{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
     height: 100%;
+    gap: 30px;
+}
+
+.advField{
+    border-radius: 20px;
+    padding-left: 20px;
+    width: 80%;
+    gap: 15px;
+    box-shadow: 3px 4px 2px 1px rgba(0, 0, 0, 0.2);;
+}
+.advField input{
+    border-radius: 0;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-left: 2px solid #000;
+}
+.advSearchCont button{
+    background-color: #a1b596;
+    border: 2px solid #000;
+    border-radius: 20px;
+    font-size: large;
+    font-weight: 500;
+    padding: 15px;
+    width: 40%;
+
+    transition: all .2s;
+}
+
+.icon{
+    font-size: large;
+    color: black;
+}
+.advSearchCont button:hover{
+    cursor: pointer;
+    background-color: rgb(124, 124, 206);
+    transform: scale(1.02);
 }

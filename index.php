@@ -25,6 +25,9 @@
                 else if($_GET["ruta"] == "user"){
                     include_once "./src/views/user.php";
                 }
+                else if($_GET["ruta"] == "singleBook"){
+                    include_once "./src/views/singleBook.php";
+                }
                 else{
                     include_once "./src/errors/404.php";
                 }
