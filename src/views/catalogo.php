@@ -44,7 +44,7 @@
         <hr>
         <div class="books">
             <?php foreach ($books as $book) {?>
-                <a href="?ruta=singleBook" class="book">
+                <a href="?ruta=singleBook&id=<?php echo $book["id"];?>" class="book">
                         <p><?php echo $book["title"]; ?></p>
                         <p><?php echo $book["author"]; ?></p>
                         <p><?php echo $book["publisher"]; ?></p>

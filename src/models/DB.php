@@ -9,7 +9,7 @@
 
 
     class DB{
-        private static $myConnection;
+        public static $myConnection;
 
         //
 
@@ -56,11 +56,35 @@
             self::connect();
             $arrayBooks = array();
             $result = mysqli_query(self::$myConnection, "SELECT * FROM book WHERE UPPER($column) LIKE UPPER('%$value%')");
-
-            while($book = mysqli_fetch_assoc($result)){
-                $arrayBooks[] = $book;
+            if($result){
+                while($book = mysqli_fetch_assoc($result)){
+                    $arrayBooks[] = $book;
+                }
+                return $arrayBooks;
             }
-            return $arrayBooks;
+            else{
+                return false;
+            }
+            
+        }
+
+        public static function getSingleBook($id){
+            self::connect();
+            $result = mysqli_query(self::$myConnection, "SELECT * FROM book WHERE ID = $id");
+            $book = mysqli_fetch_assoc($result);
+            return $book;
+        }
+
+        public static function addCoverBook($id, $img){
+            self::connect();
+    
+            $stmt = self::$myConnection->prepare("UPDATE book SET cover = ? WHERE ID = ?");
+            $stmt->bind_param("si", $img, $id);
+
+            $update = $stmt->execute();
+            $stmt->close();
+
+            return $update;
         }
 
         public static function getUserLoans($pID){
