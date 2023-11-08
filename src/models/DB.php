@@ -31,13 +31,32 @@
     
         public static function insertUser($pName, $pLast1, $pLast2, $pNickname, $pEmail, $pPassword, $pRol = "user"){
             self::connect();
-            return mysqli_query(self::$myConnection, "INSERT INTO user (name, lastname1, lastname2, nickname, email, password, rol) VALUES ('" . $pName . "', '" . $pLast1 . "', '" . $pLast2 . "', '" . $pNickname . "', '" . $pEmail . "', '" . $pPassword . "','". $pRol . "' );");
+            try {
+                $passwordHash = password_hash($pPassword, PASSWORD_BCRYPT);
+                $insert = mysqli_query(self::$myConnection, "INSERT INTO user (name, lastname1, lastname2, nickname, email, password, rol) VALUES ('" . $pName . "', '" . $pLast1 . "', '" . $pLast2 . "', '" . $pNickname . "', '" . $pEmail . "', '" . $passwordHash . "','". $pRol . "' );");
+                return $insert;
+            } catch (\Throwable $th) {
+                return false;
+            } 
         }
 
 
         public static function getUser($pNickname, $pPassword){
             self::connect();
-            return mysqli_query(self::$myConnection, "SELECT * FROM user WHERE nickname == '. $pNickname .' && password == '. $pPassword .' ");
+            try {
+                $result = mysqli_query(self::$myConnection, "SELECT * FROM user WHERE nickname = '".$pNickname."'");
+                if($result && mysqli_num_rows($result) == 1){
+                    $user = mysqli_fetch_assoc($result);
+                    $passwordHash = $user['password'];
+                    return password_verify($pPassword, $passwordHash) ? $user : false;
+                }
+                else{
+                    return false;
+                }
+            } catch (\Throwable $th) {
+                echo $th;
+                return false;
+            }
         }
 
 

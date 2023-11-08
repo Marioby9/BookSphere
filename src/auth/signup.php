@@ -1,6 +1,12 @@
 <?php
 include_once "../models/DB.php";
 
+session_start();
+if(isset($_SESSION["username"])){
+    $rutaIndex = "../../index.php";
+    header("Location:".$rutaIndex);
+}
+
 if (isset($_POST["signup"])) {
     $name = $_POST["name"]; 
     $ape1 = $_POST["ape1"]; 
@@ -8,12 +14,34 @@ if (isset($_POST["signup"])) {
     $username = $_POST["username"]; 
     $email = $_POST["email"];
     $password = $_POST["pass"];
+    $confPassword = $_POST["confPass"];
 
-    $inserted = DB::insertUser($name, $ape1, $ape2, $username, $email, $password);   
+    $errorInsert = false;
+    $errorPassword = false;
+    $errorCampo = false;
+    $anyEmptyField = empty($name) || empty($ape1) ||empty($ape2) || empty($username) || empty($email) || empty($password); 
+
+    if(!$anyEmptyField){
+        if($password == $confPassword){
+            $inserted = DB::insertUser($name, $ape1, $ape2, $username, $email, $password);
+            if($inserted){
+                header("Location: ./login.php");
+            }
+            else{
+                $errorInsert = true;
+            }
+        }
+        else{
+            $errorPassword = true;
+        }
+    }
+    else{
+        $errorCampo = true;
+    }
+     
 }
     
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -29,7 +57,17 @@ if (isset($_POST["signup"])) {
     <main class="center">
         <header class="center">
             <h1>¡Bienvenido!</h1>
-            <h3>Regístrate para empezar a usar BookSphere</h3>
+            <h3>Regístrate para empezar a usar BookSphere</h3><br>
+
+            <?php if(isset($errorCampo) && $errorCampo) { ?>
+                <h2 class="error">Error, campos incompletos</h2>
+            <?php } ?>
+            <?php if(isset($errorPassword) && $errorPassword) { ?>
+                <h2 class="error">Error, las contraseñas no coinciden</h2>
+            <?php } ?>
+            <?php if(isset($errorInsert) && $errorInsert) { ?>
+                <h2 class="error">Ha ocurrido un error inesperado</h2>
+            <?php } ?>
         </header>
         <form class="center" action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" id="form">
             <div class="field">
@@ -70,7 +108,8 @@ if (isset($_POST["signup"])) {
     </main>
     <img class="logo" src="../../public/img/logos/fullWhiteLogo.png" alt="logo">
 
-    <?php include_once "../components/overlay.inc.php"; ?> 
+    <img class="overlayImg" src="../../public/img/overlay.jpeg" alt="background">
+    <div class="overlay"></div>
 
     <script type="module" src="../../public/js/signup.js"></script>
 </body>

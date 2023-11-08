@@ -49,7 +49,7 @@
             <div class="options">
                 <div class="option">
                     <p>Cerrar Sesión: Finalizará la sesión actual sin perder datos</p>
-                    <button class="dangerButton">Cerrar Sesión</button>
+                    <a href="<?php echo $_SERVER["PHP_SELF"]."?ruta=logout"; ?>" class="dangerButton">Cerrar Sesión</a>
                 </div>
                 <div class="option">
                     <p>Eliminar Cuenta: Eliminará la cuenta actual y borrará sus datos</p>

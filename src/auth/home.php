@@ -1,3 +1,12 @@
+<?php
+    session_start();
+    $rutaIndex = "../../index.php";
+    if(isset($_SESSION["username"])){
+        header("Location:".$rutaIndex);
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -19,7 +28,6 @@
             <a class="btnLogin" href="../auth/login.php" rel="noopener noreferrer">Iniciar Sesión</a>
             <p class="btnSignUp"> ¿Aún no tienes una cuenta?. <a href="../auth/signup.php" rel="noopener noreferrer">Regístrate</a> </p>
         </div>
-        
     </main>
 
     <div class="socialMedia">
@@ -28,6 +36,7 @@
             <p>Ver Proyecto</p>
         </a>
     </div>
-    <?php include_once "../components/overlay.inc.php"; ?> 
+    <img class="overlayImg" src="../../public/img/overlay.jpeg" alt="background">
+    <div class="overlay"></div>
 </body>
 </html>

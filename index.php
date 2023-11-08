@@ -1,3 +1,12 @@
+<?php
+    session_start();
+    if(!isset($_SESSION["username"])){
+        header("Location: ./src/auth/login.php"); 
+    }
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,7 +20,8 @@
 <body class="center">
     <section class="page">
         <?php include_once "./src/components/header.inc.php"; ?>
-        <?php 
+        <?php
+            
             if(isset($_GET["ruta"])){
                 if($_GET["ruta"] == "dashboardUser"){
                     include_once "./src/views/dashboardUser.php";
@@ -25,14 +35,17 @@
                 else if($_GET["ruta"] == "user"){
                     include_once "./src/views/user.php";
                 }
+                else if($_GET["ruta"] == "logout"){
+                    include_once "./src/models/logout.php";
+                }
                 else if($_GET["ruta"] == "singleBook" && isset($_GET["id"])){
                     include_once "./src/views/singleBook.php";
                 }
-                else if($_GET["ruta"] == "subirPortada"){
-                    include_once "./src/views/subirPortada.php";
+                else if($_GET["ruta"] == "error404"){
+                    include_once "./src/errors/404.php";
                 }
                 else{
-                    include_once "./src/errors/404.php";
+                    header("Location:".$_SERVER["PHP_SELF"]."?ruta=error404");
                 }
             }
             else{
