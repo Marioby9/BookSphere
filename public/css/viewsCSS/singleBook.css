@@ -84,12 +84,17 @@ main{
     border-left: 2px solid #ffffff;
     
 }
-.buttons button{
-    padding: 10px;
+.buttons form{
     width: 80%;
+}
+
+form button{
+    padding: 10px;
+    width: 100%;
 }
 .resumen{
     margin-top: 5px;
     height: 200px;
     overflow: auto;
 }
+

@@ -1,6 +1,6 @@
 <main>
     <link rel="stylesheet" href="./public/css/viewsCSS/user.css">
-    <p class="pageTitle">Bienvenido, Marioby9</p>
+    <p class="pageTitle">Bienvenido, <?php echo $_SESSION["username"]; ?> </p>
     <div class="statsAndData">
         <div class="container stats">
             <p class="sectionTitle">Tus estadísticas</p>
@@ -15,11 +15,11 @@
         <div class="container personalData">
             <p class="sectionTitle">Datos personales</p>
             <div class="data">
-                <p>Nombre: Mario</p>
-                <p>Apellidos: Martín Godoy</p>
+                <p>Nombre: <?php echo $_SESSION["name"]; ?></p>
+                <p>Apellidos: <?php echo $_SESSION["lastname1"] . " " .$_SESSION["lastname2"]; ?></p>
                 <p>Edad: 21</p>
-                <p>Correo: mmartin.mrmg@gmail.com</p>
-                <p>Tipo cuenta: Usuario</p>
+                <p>Correo: <?php echo $_SESSION["email"]; ?></p>
+                <p>Tipo cuenta: <?php echo $_SESSION["rol"]; ?></p>
             </div>
         </div>
     </div>

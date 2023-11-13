@@ -17,6 +17,7 @@
             $user = DB::getUser($username, $password);
             if($user){
                 session_start();
+                $_SESSION["id"] = $user["id"];
                 $_SESSION["name"] = $user["name"];
                 $_SESSION["username"] = $user["nickname"];
                 $_SESSION["lastname1"] = $user["lastname1"];

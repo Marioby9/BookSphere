@@ -4,6 +4,25 @@
     if(!$book){
         header("Location:".$_SERVER["PHP_SELF"]."?ruta=error404");
     }
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if(isset($_POST["loan"])){
+            $inserted = DB::insertLoan($_SESSION["id"], $book["id"]);
+            if($inserted){
+                header("Location: " . $_SERVER["PHP_SELF"]."?ruta=singleBook&id=".$book["id"]);
+            }
+        }
+        else if(isset($_POST["return"])){
+            $returned = DB::finishLoan($_SESSION["id"], $book["id"]);
+            if($returned){
+                header("Location: " . $_SERVER["PHP_SELF"]."?ruta=singleBook&id=".$book["id"]);
+            }
+        }
+    }
+
+    if(!$book["available"]){
+        $isMyBook = DB::isMyBook($_SESSION["id"], $book["id"]);
+    }
 ?>
 
 <main>
@@ -30,9 +49,20 @@
                     </div>
                     </div>
                 <div class="buttons">
-                    <button>Alquilar</button>
+                    <form id="formLoanBook" action="<?php echo $_SERVER["PHP_SELF"]."?ruta=singleBook&id=".$book["id"];?>" method="post">
+                    <?php if($book["available"]){ ?>
+                        <button id="btnLoanBook" name="loan">Alquilar</button>
+                    <?php } else { 
+                                if($isMyBook){ ?>
+                                    <button id="btnReturnBook" name="return">Devolver</button>
+                            <?php } else{ ?>
+                                    <p>No disponible</p>
+                            <?php } } ?>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>    
+    </div> 
+    
+    <script src="./public/js/singleBook.js"></script>
 </main>

@@ -71,6 +71,59 @@
             return $arrayBooks;
         }
 
+
+        public static function getLastBooks(){
+            self::connect();
+            $arrayBooks = array();
+            $result = mysqli_query(self::$myConnection, "SELECT * FROM book ORDER BY ID DESC LIMIT 3");
+
+            while($book = mysqli_fetch_assoc($result)){
+                $arrayBooks[] = $book;
+            }
+            return $arrayBooks;
+        }
+
+        public static function getMostPopularBooks(){
+            self::connect();
+
+            $arrayBooks = array();
+            $query = "SELECT book.*, COUNT(loan.id_book) AS numLoans
+            FROM book
+            JOIN loan ON book.id = loan.id_book
+            GROUP BY book.id
+            ORDER BY numLoans DESC
+            LIMIT 3";
+            $result = mysqli_query(self::$myConnection, $query);
+
+            while($book = mysqli_fetch_assoc($result)){
+                $arrayBooks[] = $book;
+            }
+            return $arrayBooks;
+        }
+
+        public static function getMyLastLoans($userID){
+            self::connect();
+
+            try {
+                $arrayBooks = array();
+                $query = "SELECT book.id, book.title, book.author, loan.start_loan
+                FROM book
+                JOIN loan ON book.id = loan.id_book
+                WHERE ID_USER = ". $userID ." 
+                ORDER BY start_loan DESC
+                LIMIT 5";
+                $result = mysqli_query(self::$myConnection, $query);
+
+                while($book = mysqli_fetch_assoc($result)){
+                    $arrayBooks[] = $book;
+                }
+                return $arrayBooks;
+            } catch (\Throwable $th) {
+                echo $th;
+            }
+            
+        }
+
         public static function getBookByColumn($column, $value){
             self::connect();
             $arrayBooks = array();
@@ -105,6 +158,47 @@
 
             return $update;
         }
+
+
+        public static function insertLoan($userID, $bookID){
+            self::connect();
+            try {
+                $insert = mysqli_query(self::$myConnection, "INSERT INTO loan (id_user, id_book) VALUES ('" . $userID . "', '" . $bookID . "');");
+                if($insert){
+                    $updated = mysqli_query(self::$myConnection, "UPDATE book SET available = false WHERE id = ". $bookID);
+                    return $updated;
+                }   
+                else{
+                    return false;
+                }
+            } catch (\Throwable $th) {
+                return false;
+            } 
+        }
+
+        public static function finishLoan($userID, $bookID){
+            self::connect();
+            try {
+                $updateLoan = mysqli_query(self::$myConnection, "UPDATE loan SET end_loan = CURDATE() WHERE id_user = ". $userID . " AND id_book = " . $bookID . " AND end_loan IS NULL;");
+                $updateBook = mysqli_query(self::$myConnection, "UPDATE book SET available = true WHERE id = ". $bookID);
+                return ($updateLoan && $updateBook);
+            } catch (\Throwable $th) {
+                echo $th;
+                return false;
+            }
+        }
+
+        public static function isMyBook($userID, $bookID){
+            self::connect();
+            try {
+                $result = mysqli_query(self::$myConnection, "SELECT ID FROM loan WHERE id_user = ".$userID." AND id_book = ".$bookID." AND end_loan is NULL;");
+                return ($result && mysqli_num_rows($result) == 1);
+            } catch (\Throwable $th) {
+                echo $th;
+                return false;
+            }
+        }
+
 
         public static function getUserLoans($pID){
             self::connect();

@@ -21,6 +21,7 @@
                 <option value="isbn">ISBN</option>
                 <option value="publisher">Editorial</option>
                 <option value="genre">Género</option>
+                <option value="language">Idioma</option>
             </select>
             <div class="field">
                 <input type="text" name="keyword" id="password" placeholder="Introduce las palabras clave">
@@ -50,7 +51,7 @@
                         <p><?php echo $book["publisher"]; ?></p>
                         <p><?php echo $book["language"]; ?></p>
                         <p><?php echo $book["genre"]; ?></p>
-                        <p class="available"><?php echo $book["available"]; ?></p>
+                        <p class="available"><?php echo ($book["available"] ? "SI" : "NO"); ?></p>
                 </a>
             <?php } ?>
         </div>
