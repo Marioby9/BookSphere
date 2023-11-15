@@ -44,7 +44,7 @@
         public static function getUser($pNickname, $pPassword){
             self::connect();
             try {
-                $result = mysqli_query(self::$myConnection, "SELECT * FROM user WHERE nickname = '".$pNickname."'");
+                $result = mysqli_query(self::$myConnection, "SELECT * FROM user WHERE nickname = '".$pNickname."' AND unsubscribe_date IS NULL");
                 if($result && mysqli_num_rows($result) == 1){
                     $user = mysqli_fetch_assoc($result);
                     $passwordHash = $user['password'];
@@ -124,6 +124,50 @@
             
         }
 
+        public static function getAllMyBooks($userID){
+            self::connect();
+
+            try {
+                $arrayBooks = array();
+                $query = "SELECT book.id, book.title, book.author, book.genre, loan.*
+                FROM book
+                JOIN loan ON book.id = loan.id_book
+                WHERE ID_USER = $userID 
+                GROUP BY book.id 
+                ORDER BY loan.end_loan";
+                $result = mysqli_query(self::$myConnection, $query);
+
+                while($book = mysqli_fetch_assoc($result)){
+                    $arrayBooks[] = $book;
+                }
+                return $arrayBooks;
+            } catch (\Throwable $th) {
+                echo $th;
+            }
+        }
+
+        public static function getFavoriteBooks($userID){
+            self::connect();
+
+            try {
+                $arrayBooks = array();
+                $query = "SELECT book.id, book.title, book.cover, count(*) as veces_leido
+                          FROM book JOIN loan ON book.id = loan.id_book 
+                          WHERE ID_USER = 17 
+                          GROUP BY book.id 
+                          ORDER BY veces_leido DESC 
+                          LIMIT 3;";
+                $result = mysqli_query(self::$myConnection, $query);
+
+                while($book = mysqli_fetch_assoc($result)){
+                    $arrayBooks[] = $book;
+                }
+                return $arrayBooks;
+            } catch (\Throwable $th) {
+                echo $th;
+            }
+        }
+
         public static function getBookByColumn($column, $value){
             self::connect();
             $arrayBooks = array();
@@ -200,41 +244,63 @@
         }
 
 
-        public static function getUserLoans($pID){
+        public static function getTotalUserLoans($pID){
             self::connect();
-            $userLoans = mysqli_query(self::$myConnection, "SELECT * FROM loan WHERE id_user == $pID");
-            return mysqli_fetch_all($userLoans);
+            try {
+                $result =  mysqli_query(self::$myConnection, "SELECT COUNT(*) as TOTAL FROM loan WHERE id_user = $pID");
+                $row = mysqli_fetch_assoc($result);
+                return $row["TOTAL"];
+            } catch (\Throwable $th) {
+                echo $th;
+                return 0;
+            }
+        }
+
+        public static function getLastMonthBooks($pID){
+            self::connect();
+            $currentDate = date("Y-m-d");
+            $lastMonthDate = date("Y-m-d", strtotime("-1 month"));
+            try {
+                $result =  mysqli_query(self::$myConnection, "SELECT COUNT(*) as TOTAL FROM loan WHERE id_user = $pID AND start_loan BETWEEN '$lastMonthDate' AND '$currentDate'");
+                $row = mysqli_fetch_assoc($result);
+                return $row["TOTAL"];
+            } catch (\Throwable $th) {
+                echo $th;
+                return 0;
+            }
+        }
+
+        public static function getFavoriteUserGenre($pID){
+            self::connect();
+            try {
+                $query = "SELECT book.genre, COUNT(loan.id_book) AS numLoans
+                FROM book
+                JOIN loan ON book.id = loan.id_book
+                WHERE loan.id_user = $pID
+                GROUP BY book.genre
+                ORDER BY numLoans DESC";
+                $result = mysqli_query(self::$myConnection, $query);
+
+                $row = mysqli_fetch_assoc($result);
+
+                return $row ? $row["genre"] : "No hay libros";
+            } catch (\Throwable $th) {
+                echo $th;
+                return 0;
+            }
         }
 
 
-        public static function getNumOfLoans($pID){
+        public static function deleteAccount($pID){
             self::connect();
-            return mysqli_query(self::$myConnection, "SELECT COUNT(*) FROM loan WHERE id_user == $pID");
+            try {
+                $deleted = mysqli_query(self::$myConnection, "UPDATE user SET unsubscribe_date = CURDATE() WHERE id = $pID");
+                return $deleted;
+            } catch (\Throwable $th) {
+                echo $th;
+                return false;
+            }
         }
-
-
-        public static function getAllUsers(){
-            self::connect();
-            $users = mysqli_query(self::$myConnection, "SELECT * FROM user");
-            return mysqli_fetch_all($users);
-        }
-    
-
-
-
     }
-
-
-
-
-    /*ARRAY ASOCIATIVOS:
-    function assocArray(){
-        $resultado = mysqli_query($myConnection, "SELECT * FROM user", MYSQLI_ASSOC);
-        
-    }*/
-
-    //SENTENCIAS PREPARADAS
-
-
 
 ?>

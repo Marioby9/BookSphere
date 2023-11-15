@@ -27,7 +27,8 @@
             <?php if(!$myLastLoans){ ?>
                 <div class="noLoans">
                     <h3>Vaya... Parece que aún no has alquilado ningún libro</h3>
-                    <i class="bookIcon fa-solid fa-book"></i>
+                    <img src="./public/img/books.png" alt="No image">
+                    <a href="?ruta=catalogo">Ve directo al catálogo</a>
                 </div>
             <?php } ?>
             </div>

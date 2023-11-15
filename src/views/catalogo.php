@@ -96,5 +96,4 @@
     </div>
 
     <script src="./public/js/catalogo.js"></script>
-
 </main>

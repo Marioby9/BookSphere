@@ -1,3 +1,12 @@
+<?php
+    include_once './src/models/DB.php';
+    $uid = $_SESSION["id"];
+    $totalUserLoans = DB::getTotalUserLoans($uid);
+    $lastMonthLoans = DB::getLastMonthBooks($uid);
+    $favoriteGenre = DB::getFavoriteUserGenre($uid);
+
+?>
+
 <main>
     <link rel="stylesheet" href="./public/css/viewsCSS/user.css">
     <p class="pageTitle">Bienvenido, <?php echo $_SESSION["username"]; ?> </p>
@@ -5,11 +14,10 @@
         <div class="container stats">
             <p class="sectionTitle">Tus estadísticas</p>
             <div class="data">
-                <p>Total libros leídos: 200</p>
-                <p>Libros leídos en el último mes: 20</p>
-                <p>Género más leído: Terror</p>
-                <p>Fecha inicio registro: 20/10/2023</p>
-                <p>Tipo cuenta: Usuario</p>
+                <p>Total libros leídos: <?php echo $totalUserLoans;?></p>
+                <p>Libros leídos en el último mes: <?php echo $lastMonthLoans;?></p>
+                <p>Género más leído: <?php echo $favoriteGenre;?></p>
+                <p>Fecha inicio registro: <?php echo $_SESSION["signup_date"];?></p>
             </div>
         </div>
         <div class="container personalData">
@@ -17,7 +25,6 @@
             <div class="data">
                 <p>Nombre: <?php echo $_SESSION["name"]; ?></p>
                 <p>Apellidos: <?php echo $_SESSION["lastname1"] . " " .$_SESSION["lastname2"]; ?></p>
-                <p>Edad: 21</p>
                 <p>Correo: <?php echo $_SESSION["email"]; ?></p>
                 <p>Tipo cuenta: <?php echo $_SESSION["rol"]; ?></p>
             </div>
@@ -53,7 +60,7 @@
                 </div>
                 <div class="option">
                     <p>Eliminar Cuenta: Eliminará la cuenta actual y borrará sus datos</p>
-                    <button class="dangerButton">Delete Account</button>
+                    <a href="<?php echo $_SERVER["PHP_SELF"]."?ruta=deleteAccount"; ?>" class="dangerButton">Borrar Cuenta</a>
                 </div>
             </div>
         </div>

@@ -110,4 +110,5 @@ main{
     width: 120px;
     padding: 5px;
     border: 1px solid red;
+    text-align: center;
 }

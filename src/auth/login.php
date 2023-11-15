@@ -23,6 +23,7 @@
                 $_SESSION["lastname1"] = $user["lastname1"];
                 $_SESSION["lastname2"] = $user["lastname2"];
                 $_SESSION["email"] = $user["email"];
+                $_SESSION["signup_date"] = $user["signup_date"];
                 $_SESSION["rol"] = $user["rol"];
                 header("Location:".$rutaIndex);
             }

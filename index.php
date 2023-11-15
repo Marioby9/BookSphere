@@ -38,6 +38,9 @@
                 else if($_GET["ruta"] == "logout"){
                     include_once "./src/models/logout.php";
                 }
+                else if($_GET["ruta"] == "deleteAccount"){
+                    include_once "./src/models/deleteAccount.php";
+                }
                 else if($_GET["ruta"] == "singleBook" && isset($_GET["id"])){
                     include_once "./src/views/singleBook.php";
                 }

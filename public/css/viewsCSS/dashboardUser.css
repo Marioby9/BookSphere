@@ -95,13 +95,21 @@ main{
 /*NO LOANS*/
 .noLoans{
     height: 100%;
-    width: 100%;
+    width: calc(100% + 100px);
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 40px;
+}
+
+.noLoans img{
+    height: 40%;
+}
+.noLoans a{
+    text-decoration: underline solid #ffffff;
+
 }
 
 
