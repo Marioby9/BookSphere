@@ -146,6 +146,28 @@
             }
         }
 
+        public static function getCurrentlyReading($userID){
+            self::connect();
+
+            try {
+                $arrayBooks = array();
+                $query = "SELECT book.id, book.title, book.author, book.genre, loan.*
+                FROM book
+                JOIN loan ON book.id = loan.id_book
+                WHERE ID_USER = $userID AND loan.end_loan IS NULL
+                GROUP BY book.id 
+                ORDER BY loan.end_loan";
+                $result = mysqli_query(self::$myConnection, $query);
+
+                while($book = mysqli_fetch_assoc($result)){
+                    $arrayBooks[] = $book;
+                }
+                return $arrayBooks;
+            } catch (\Throwable $th) {
+                echo $th;
+            }
+        }
+
         public static function getFavoriteBooks($userID){
             self::connect();
 

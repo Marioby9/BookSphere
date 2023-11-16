@@ -2,7 +2,7 @@
     include_once './src/models/DB.php';
 
     $favoriteBooks = DB::getFavoriteBooks($_SESSION["id"]);
-
+    $currentlyReading = DB::getCurrentlyReading($_SESSION["id"]);
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["filter"]) && !empty($_POST["keyword"])) {
         $filter = $_POST["filter"];
@@ -17,32 +17,37 @@
     <link rel="stylesheet" href="./public/css/viewsCSS/userBooks.css">
     <div class="topPage">
         <div class="readingCont">
-            <p class="sectionTitle">Leyendo actualmente</p>
+            <p class="sectionTitle">Leyendo actualmente:  <?php echo count($currentlyReading);?> </p>
+            <div class="currentBooks">
+                <?php foreach ($currentlyReading as $currentBook) {?>
+                    <a href="?ruta=singleBook&id=<?php echo $currentBook["id"];?>">
+                        <div class="currentBook">
+                            <i class="currentBookIcon fa-solid fa-book"></i>
+                            <div class="currentBookData">
+                                <p class="currentBookTitle"><?php echo $currentBook["title"];?></p>
+                                <div class="currentBookBottom">
+                                    <p class="currentBookAuthor"><?php echo $currentBook["author"];?></p>
+                                    <p class="currentBookLoanDate"><?php echo $currentBook["start_loan"];?></p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                <?php } ?>
+            </div>
         </div>
         <div class="favoritesCont">
             <p class="sectionTitle">Tus favoritos</p>
             <div class="favorites">
-                <div class="card one">
-                    <img src="data:image/jpg;base64,<?php echo base64_encode($favoriteBooks[0]["cover"]) ?>" alt="NO HAY IMAGEN">
-                    <div class="cardDetails">
-                        <div class="cardDetailsHaeder"><?php echo $favoriteBooks[0]["title"] ?></div>
-                        <div class="cardDetailsButton">Ver Libro</div>
-                    </div>
-                </div>
-                <div class="card two">
-                    <img src="data:image/jpg;base64,<?php echo base64_encode($favoriteBooks[1]["cover"]) ?>" alt="NO HAY IMAGEN">
-                    <div class="cardDetails">
-                        <div class="cardDetailsHaeder"><?php echo $favoriteBooks[1]["title"] ?></div>
-                        <div class="cardDetailsButton">Ver Libro</div>
-                    </div>
-                </div>
-                <div class="card three">
-                    <img src="data:image/jpg;base64,<?php echo base64_encode($favoriteBooks[2]["cover"]) ?>" alt="NO HAY IMAGEN">   
-                    <div class="cardDetails">
-                        <div class="cardDetailsHaeder"><?php echo $favoriteBooks[2]["title"] ?></div>
-                        <div class="cardDetailsButton">Ver Libro</div>
-                    </div>
-                </div>
+                <?php for($i=0; $i<count($favoriteBooks); $i++) {?>
+                    <a class="card <?php if($i == 0){echo "one";}elseif($i == 1){echo "two";}else{echo "three";} ?>" href="?ruta=singleBook&id=<?php echo $favoriteBooks[$i]["id"]; ?>">
+                        <img src="data:image/jpg;base64,<?php echo base64_encode($favoriteBooks[$i]["cover"]) ?>" alt="NO HAY IMAGEN">
+                        <div class="cardDetails">
+                            <div class="cardDetailsHaeder"><?php echo $favoriteBooks[$i]["title"] ?></div>
+                            <p>Veces leído: <?php echo $favoriteBooks[$i]["veces_leido"] ?> </p>
+                            <div class="cardDetailsButton">Ver Libro</div>
+                        </div>
+                    </a>
+                <?php } ?>
             </div>
         </div>
     </div>
@@ -86,10 +91,12 @@
                                 <p><?php echo $book["genre"]; ?></p>
                                 <p><?php echo $book["start_loan"]; ?></p>
                                 <p><?php echo ($book["end_loan"] ? $book["end_loan"] : "En curso"); ?></p>
-                            
-                                
                         </a>
-                        <button class="return">devolver</button>
+                        <?php if($book["end_loan"]){ ?>
+                            <button class="return">realquilar</button>
+                        <?php }else{ ?>
+                            <button class="return">devolver</button>
+                            <?php } ?>
                     </div>
                     
                 <?php } ?>
