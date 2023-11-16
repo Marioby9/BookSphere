@@ -175,7 +175,7 @@
                 $arrayBooks = array();
                 $query = "SELECT book.id, book.title, book.cover, count(*) as veces_leido
                           FROM book JOIN loan ON book.id = loan.id_book 
-                          WHERE ID_USER = 17 
+                          WHERE ID_USER = $userID 
                           GROUP BY book.id 
                           ORDER BY veces_leido DESC 
                           LIMIT 3;";

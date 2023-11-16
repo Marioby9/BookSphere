@@ -19,6 +19,7 @@ main{
     display: flex;
     flex-direction: column;
     gap:40px;
+    font-weight: 600;
 }
 
 
@@ -44,6 +45,8 @@ main{
 .personalData{
     display: flex;
     flex-direction: column;
+    background-color: #ffffff8f;
+    color: black;
     gap: 30px ;
     width: 30%;
 }
@@ -52,6 +55,7 @@ main{
     display: flex;
     flex-direction: column;
     gap: 20px;
+    font-weight: 600;
 }
 
 
@@ -62,7 +66,7 @@ main{
 
 .sectionTitle{
     font-size: x-large;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .configData{

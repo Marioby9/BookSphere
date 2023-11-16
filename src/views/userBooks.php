@@ -18,35 +18,51 @@
     <div class="topPage">
         <div class="readingCont">
             <p class="sectionTitle">Leyendo actualmente:  <?php echo count($currentlyReading);?> </p>
-            <div class="currentBooks">
-                <?php foreach ($currentlyReading as $currentBook) {?>
-                    <a href="?ruta=singleBook&id=<?php echo $currentBook["id"];?>">
-                        <div class="currentBook">
-                            <i class="currentBookIcon fa-solid fa-book"></i>
-                            <div class="currentBookData">
-                                <p class="currentBookTitle"><?php echo $currentBook["title"];?></p>
-                                <div class="currentBookBottom">
-                                    <p class="currentBookAuthor"><?php echo $currentBook["author"];?></p>
-                                    <p class="currentBookLoanDate"><?php echo $currentBook["start_loan"];?></p>
+            <?php if($currentlyReading){ ?>
+                <div class="currentBooks">
+                    <?php foreach ($currentlyReading as $currentBook) {?>
+                        <a href="?ruta=singleBook&id=<?php echo $currentBook["id_book"];?>">
+                            <div class="currentBook">
+                                <i class="currentBookIcon fa-solid fa-book"></i>
+                                <div class="currentBookData">
+                                    <p class="currentBookTitle"><?php echo $currentBook["title"];?></p>
+                                    <div class="currentBookBottom">
+                                        <p class="currentBookAuthor"><?php echo $currentBook["author"];?></p>
+                                        <p class="currentBookAuthor"><?php echo $currentBook["genre"];?></p>
+                                        <p class="currentBookLoanDate"><?php echo $currentBook["start_loan"];?></p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-                <?php } ?>
-            </div>
+                        </a>
+                    <?php } ?>
+                </div>
+            <?php }else{ ?>
+                <div class="noBooks">
+                    <h3>Actualmente no estás leyendo ningún libro</h3>
+                    <img src="./public/img/books.png" alt="No image">
+                    <a href="?ruta=catalogo">Ve directo al catálogo</a>
+                </div>
+            <?php } ?>
         </div>
         <div class="favoritesCont">
             <p class="sectionTitle">Tus favoritos</p>
             <div class="favorites">
-                <?php for($i=0; $i<count($favoriteBooks); $i++) {?>
-                    <a class="card <?php if($i == 0){echo "one";}elseif($i == 1){echo "two";}else{echo "three";} ?>" href="?ruta=singleBook&id=<?php echo $favoriteBooks[$i]["id"]; ?>">
-                        <img src="data:image/jpg;base64,<?php echo base64_encode($favoriteBooks[$i]["cover"]) ?>" alt="NO HAY IMAGEN">
-                        <div class="cardDetails">
-                            <div class="cardDetailsHaeder"><?php echo $favoriteBooks[$i]["title"] ?></div>
-                            <p>Veces leído: <?php echo $favoriteBooks[$i]["veces_leido"] ?> </p>
-                            <div class="cardDetailsButton">Ver Libro</div>
-                        </div>
-                    </a>
+                <?php if($favoriteBooks){ ?>
+                    <?php for($i=0; $i<count($favoriteBooks); $i++) {?>
+                        <a class="card <?php if($i == 0){echo "one";}elseif($i == 1){echo "two";}else{echo "three";} ?>" href="?ruta=singleBook&id=<?php echo $favoriteBooks[$i]["id"]; ?>">
+                            <img src="data:image/jpg;base64,<?php echo base64_encode($favoriteBooks[$i]["cover"]) ?>" alt="NO HAY IMAGEN">
+                            <div class="cardDetails">
+                                <div class="cardDetailsHaeder"><?php echo $favoriteBooks[$i]["title"] ?></div>
+                                <p>Veces leído: <?php echo $favoriteBooks[$i]["veces_leido"] ?> </p>
+                                <div class="cardDetailsButton">Ver Libro</div>
+                            </div>
+                        </a>
+                    <?php } ?>
+                <?php }else{ ?>
+                    <div class="noBooks">
+                        <h3>No tienes ningún favorito</h3>
+                        <a href="?ruta=catalogo">Ve directo al catálogo</a>
+                    </div>
                 <?php } ?>
             </div>
         </div>
@@ -92,10 +108,10 @@
                                 <p><?php echo $book["start_loan"]; ?></p>
                                 <p><?php echo ($book["end_loan"] ? $book["end_loan"] : "En curso"); ?></p>
                         </a>
-                        <?php if($book["end_loan"]){ ?>
-                            <button class="return">realquilar</button>
-                        <?php }else{ ?>
-                            <button class="return">devolver</button>
+                            <?php if($book["end_loan"]){ ?>
+                                <button class="return" name="reloan">realquilar</button>
+                            <?php }else{ ?>
+                                <button class="return" name="return">devolver</button>
                             <?php } ?>
                     </div>
                     
