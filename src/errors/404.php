@@ -4,6 +4,6 @@
         <div class="error-code">404</div>
         <div class="error-message">¡Ups! Parece que la página que estás buscando no existe.</div>
         <br>
-        <a href="?ruta=dashboardUser" class="back-home">Volver a la página principal</a>
+        <a href="/DWES/BookSphere/index.php" class="back-home">Volver a la página principal</a>
     </div>
 </main>

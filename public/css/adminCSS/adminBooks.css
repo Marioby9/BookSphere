@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+#colorPalette{
+    color: #144d27;
+    color: #1db954;
+    color: #1ed760;
+    color: #89ac76;
+    color: #ffffff;
+    color: #191414;
+    color: rgba(0, 0, 0, 0.845);
+    color: #0a31178f;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.845);
+    gap: 40px;
+    border-radius: 30px;
+}
+.search p{
+    font-size: x-large;
+}
+.search select{
+    border-radius: 15px;
+    font-size: large;
+    padding: 10px;
+    width: 15%;
+    cursor: pointer;
+}
+
+.field{
+    display: flex;
+    align-items: center;
+    width: 50%;
+    gap: 2px;
+    background-color: #ffffff;
+    border-radius: 30px;
+    padding: 5px;
+}
+.field input{
+    background-color: #ffffff;
+    padding: 10px;
+    border: none;
+    border-radius: 30px;
+    font-size: medium;
+    width: 90%;
+    font-size: large;
+}
+
+.field input:focus{
+    outline: none;
+}
+
+.searchButton{
+    cursor: pointer;
+    font-size: large;
+    color: black;
+    transition: transform .3s;
+}
+.searchButton:hover{
+    transform: scale(1.2);
+}
+
+.avanzada{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    height: 100%;
+    padding: 5px;
+    border-radius: 10px;
+    transition: background-color .2s;
+    cursor: pointer;
+}
+.avanzada:hover{
+    background-color: #144d27;
+
+}
+.avanzada p{
+    font-size: small;
+}
+.avanzada i{
+    font-size: large;
+    color: #ffffff;
+}
+
+
+
+
+.booksCont{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+    min-height: 200px;
+    max-height: 600px;
+    padding: 40px 10px;
+    background-color: rgba(0, 0, 0, 0.845);
+    gap: 40px;
+    border-radius: 30px;
+}
+
+.rowNames{
+    width: 100%;
+    display: flex;
+}
+.rowNames p{
+    font-weight: 600;
+    font-size: x-large;
+    width: 100%;
+    text-align: center;
+}
+
+.books{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: scroll;
+}
+.books{
+    &::-webkit-scrollbar {
+        width: 12px; 
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #144d27; 
+        border-radius: 5px; 
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: #fff;
+        border-radius: 5px;
+    }
+}
+
+.book{
+    color: #ffffff;
+    font-weight: 400;
+    width: 100%;
+    display: flex;
+    padding: 20px 0;
+    border-radius: 10px;
+    transition: all .1s;
+}
+.book:hover{
+    background-color: #144d27 ;
+    cursor: pointer;
+}
+.book p{
+    text-align: center;
+    width: 100%;
+}
+
+p.available{
+    width: 70%;
+}
+

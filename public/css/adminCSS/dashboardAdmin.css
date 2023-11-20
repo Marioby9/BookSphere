@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+#colorPalette{
+    color: #144d27;
+    color: #1db954;
+    color: #1ed760;
+    color: #89ac76;
+    color: #ffffff;
+    color: #191414;
+    color: rgba(0, 0, 0, 0.845);
+    color: #0a31178f;
+}
+
+
+main{
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+.left{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 60%;
+    height: fit-content;
+}
+.sectionTitle{
+    font-size: x-large;
+    font-weight: 600;
+}
+
+
+
+.lastUsers{
+    height: 450px;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.845);
+    gap: 40px;
+    border-radius: 30px;
+    
+}
+
+
+.users{
+    width: 80%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+}
+
+.user{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 10px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+.user:hover{
+    background-color: #144d27 ;
+    cursor: pointer;
+    .bookIcon{
+        transform: scale(1.1);
+    }
+}
+
+.data{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.bookIcon{
+    font-size: xxx-large;
+    transition: 0.5s;
+}
+.user .bottom{
+    font-weight: lighter;
+    opacity: 0.95;
+    display: flex;
+}
+.user .bottom .loanAuthor{
+    width: 50%;
+}
+.user .bottom .loanDate{
+    width: 50%;
+}
+.users a{
+    color: #ffffff;
+}
+
+
+/*NO LOANS*/
+.noLoans{
+    height: 100%;
+    width: calc(100% + 100px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.noLoans img{
+    height: 40%;
+}
+.noLoans a{
+    text-decoration: underline solid #ffffff;
+
+}
+
+
+
+/*Most Active Users*/
+
+.mostActiveUsers{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.845);
+    gap: 20px;
+    border-radius: 30px;
+}
+
+.slide{
+    display: none;
+}
+.slide.active{
+    display: flex;
+}
+
+.sliders{
+    position: relative;
+}
+
+.sliders i{
+    font-size: xx-large;
+}
+
+.bNext{
+    right: -20px;
+}
+.bPrev{
+    left: -20px;
+}
+
+.bSlide{
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transition: transform .3s;
+    background-color: black;
+    border-radius: 100%;
+    color: #1ed760;
+}
+.bSlide:hover{
+    transform: scale(1.3);
+}
+
+.activeUser{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    height: 200px;
+    padding: 20px;
+    background-color: #ffffff91;
+    border-radius: 30px;
+    color: black;
+}
+.activeUserData{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*RIGHT SIDE*/
+.right{
+    width: 35%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.aside{
+    height: 580px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.845);
+    gap: 20px;
+    border-radius: 30px;
+}
+
+.topBookCard{
+    display: flex;
+    background-color: #ffffff91;
+    height: 150px;
+    padding: 5px;
+    border-radius: 20px;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.topBookCard:hover{
+    box-shadow: #1db954 0px 0px 5px 5px;
+}
+
+.topBookCover{
+    width: 40%;
+    border-radius: 20px;
+}
+.topBookContent{
+    color: black;
+    gap: 10px;
+    width: 50%;
+    flex-direction: column;
+    text-align: center;
+}
+
+
+.colaborations{
+    color: black;
+    flex-direction: column;
+    height: fit-content;
+    padding: 40px;
+    background-color: #ffffff8f;
+    gap: 20px;
+    border-radius: 30px;
+}
+.colaborations .btnRed{
+    background-color: #191414;
+    color: white;
+}
+
+.colaborations .options{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.row{
+    display: flex;
+    gap: 10px;
+}

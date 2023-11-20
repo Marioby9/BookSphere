@@ -69,11 +69,16 @@ main{
     font-weight: 700;
 }
 
+.config{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
 .configData{
     margin-top: 10px;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 20px;
 }
 .editParam{
     display: flex;
@@ -110,9 +115,15 @@ main{
 
 .dangerButton{
     cursor: pointer;
-    background-color: #ffffff;
+    background-color:#ffffff;
     width: 120px;
     padding: 5px;
-    border: 1px solid red;
     text-align: center;
+    border-radius: 10px;
+    border: 2px solid red;
+    color: #000;
+}
+
+.dangerButton:hover{
+    background-color: #89ac76;
 }

@@ -19,40 +19,74 @@
 </head>
 <body class="center">
     <section class="page">
-        <?php include_once "./src/components/header.inc.php"; ?>
+
         <?php
-            
-            if(isset($_GET["ruta"])){
-                if($_GET["ruta"] == "dashboardUser"){
-                    include_once "./src/views/dashboardUser.php";
-                }
-                else if($_GET["ruta"] == "catalogo"){
-                    include_once "./src/views/catalogo.php";
-                }
-                else if($_GET["ruta"] == "userBooks"){
-                    include_once "./src/views/userBooks.php";
-                }
-                else if($_GET["ruta"] == "user"){
-                    include_once "./src/views/user.php";
-                }
-                else if($_GET["ruta"] == "logout"){
-                    include_once "./src/models/logout.php";
-                }
-                else if($_GET["ruta"] == "deleteAccount"){
-                    include_once "./src/models/deleteAccount.php";
-                }
-                else if($_GET["ruta"] == "singleBook" && isset($_GET["id"])){
-                    include_once "./src/views/singleBook.php";
-                }
-                else if($_GET["ruta"] == "error404"){
-                    include_once "./src/errors/404.php";
+            if($_SESSION["rol"] == "user"){
+                include_once "./src/components/header.inc.php"; 
+                if(isset($_GET["ruta"])){
+                    if($_GET["ruta"] == "dashboardUser"){
+                        include_once "./src/views/dashboardUser.php";
+                    }
+                    else if($_GET["ruta"] == "catalogo"){
+                        include_once "./src/views/catalogo.php";
+                    }
+                    else if($_GET["ruta"] == "userBooks"){
+                        include_once "./src/views/userBooks.php";
+                    }
+                    else if($_GET["ruta"] == "user"){
+                        include_once "./src/views/user.php";
+                    }
+                    else if($_GET["ruta"] == "logout"){
+                        include_once "./src/models/logout.php";
+                    }
+                    else if($_GET["ruta"] == "deleteAccount"){
+                        include_once "./src/models/deleteAccount.php";
+                    }
+                    else if($_GET["ruta"] == "singleBook" && isset($_GET["id"])){
+                        include_once "./src/views/singleBook.php";
+                    }
+                    else if($_GET["ruta"] == "error404"){
+                        include_once "./src/errors/404.php";
+                    }
+                    else{
+                        header("Location:".$_SERVER["PHP_SELF"]."?ruta=error404");
+                    }
                 }
                 else{
-                    header("Location:".$_SERVER["PHP_SELF"]."?ruta=error404");
+                    header("Location:".$_SERVER["PHP_SELF"]."?ruta=dashboardUser");
                 }
-            }
-            else{
-                header("Location:".$_SERVER["PHP_SELF"]."?ruta=dashboardUser");
+            }else if($_SESSION["rol"] == "admin"){
+                include_once "./src/components/adminHeader.inc.php"; 
+                if(isset($_GET["ruta"])){
+                    if($_GET["ruta"] == "dashboardAdmin"){
+                        include_once "./src/admin/dashboardAdmin.php";
+                    }
+                    else if($_GET["ruta"] == "adminUsers"){
+                        include_once "./src/admin/adminUsers.php";
+                    }
+                    else if($_GET["ruta"] == "adminBooks"){
+                        include_once "./src/admin/adminBooks.php";
+                    }
+                    else if($_GET["ruta"] == "adminProfile"){
+                        include_once "./src/admin/adminProfile.php";
+                    }
+                    else if($_GET["ruta"] == "logout"){
+                        include_once "./src/models/logout.php";
+                    }
+                    else if($_GET["ruta"] == "deleteAccount"){
+                        include_once "./src/models/deleteAccount.php";
+                    }
+                    else if($_GET["ruta"] == "error404"){
+                        include_once "./src/errors/404.php";
+                    }
+                    else{
+                        header("Location:".$_SERVER["PHP_SELF"]."?ruta=error404");
+                    }
+                    
+                }
+                else{
+                    header("Location:".$_SERVER["PHP_SELF"]."?ruta=dashboardAdmin");
+                }
             }
         ?> 
         <?php include_once "./src/components/footer.inc.php"; ?> 

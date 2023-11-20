@@ -313,6 +313,94 @@
         }
 
 
+        /*--------------------------------ADMIN---------------------------------------------*/
+        public static function getLastUsers(){
+            self::connect();
+
+            try {
+                $arrayUsers = array();
+                $query = "SELECT *
+                FROM user
+                ORDER BY signup_date DESC";
+                $result = mysqli_query(self::$myConnection, $query);
+
+                while($user = mysqli_fetch_assoc($result)){
+                    $arrayUsers[] = $user;
+                }
+                return $arrayUsers;
+            } catch (\Throwable $th) {
+                echo $th;
+            }
+        }
+
+        public static function getMostActiveUsers(){
+            self::connect();
+
+            try {
+                $arrayUsers = array();
+                $query = "SELECT USER.*, COUNT(*) AS TOTAL_LIBROS FROM USER JOIN LOAN ON USER.ID = LOAN.id_user GROUP BY user.id ORDER BY TOTAL_LIBROS DESC LIMIT 3";
+                $result = mysqli_query(self::$myConnection, $query);
+
+                while($user = mysqli_fetch_assoc($result)){
+                    $arrayUsers[] = $user;
+                }
+                return $arrayUsers;
+            } catch (\Throwable $th) {
+                echo $th;
+            }
+        }
+
+        public static function getAllUsers(){
+            self::connect();
+
+            try {
+                $arrayUsers = array();
+                $query = "SELECT * FROM user ORDER BY signup_date DESC";
+                $result = mysqli_query(self::$myConnection, $query);
+
+                while($user = mysqli_fetch_assoc($result)){
+                    $arrayUsers[] = $user;
+                }
+                return $arrayUsers;
+            } catch (\Throwable $th) {
+                echo $th;
+            }
+        }
+
+        public static function getUsersByColumn($pFilter, $pKeyword){
+            self::connect();
+
+            try {
+                $arrayUsers = array();
+                $query = "SELECT * FROM user WHERE UPPER($pFilter) LIKE UPPER('%$pKeyword%')";
+                $result = mysqli_query(self::$myConnection, $query);
+
+                while($user = mysqli_fetch_assoc($result)){
+                    $arrayUsers[] = $user;
+                }
+                return $arrayUsers;
+            } catch (\Throwable $th) {
+                echo $th;
+            }
+        }
+
+        public static function getAdminBooks(){
+            self::connect();
+    
+            try {
+                $arrayUsers = array();
+                $query = "SELECT book.*, count(*) AS VECES_PRESTADO FROM book LEFT JOIN loan on book.id = loan.id_book GROUP BY book.id";
+                $result = mysqli_query(self::$myConnection, $query);
+    
+                while($user = mysqli_fetch_assoc($result)){
+                    $arrayUsers[] = $user;
+                }
+                return $arrayUsers;
+            } catch (\Throwable $th) {
+                echo $th;
+            }
+        }
+
         public static function deleteAccount($pID){
             self::connect();
             try {
