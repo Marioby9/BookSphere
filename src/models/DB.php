@@ -213,18 +213,24 @@
             return $book;
         }
 
-        public static function addCoverBook($id, $img){
+        public static function getSingleUser($id) {
             self::connect();
-    
-            $stmt = self::$myConnection->prepare("UPDATE book SET cover = ? WHERE ID = ?");
-            $stmt->bind_param("si", $img, $id);
 
-            $update = $stmt->execute();
-            $stmt->close();
-
-            return $update;
+            try {
+                $query = "SELECT * FROM user WHERE ID LIKE $id";
+                $result = mysqli_query(self::$myConnection, $query);
+                if($result){
+                    $user = mysqli_fetch_assoc($result);
+                    return $user;
+                }
+                else{
+                    return false;
+                }
+                
+            } catch (\Throwable $th) {
+                echo $th;
+            }
         }
-
 
         public static function insertLoan($userID, $bookID){
             self::connect();
@@ -380,7 +386,7 @@
                 }
                 return $arrayUsers;
             } catch (\Throwable $th) {
-                echo $th;
+                return [];
             }
         }
 
@@ -389,7 +395,7 @@
     
             try {
                 $arrayUsers = array();
-                $query = "SELECT book.*, count(*) AS VECES_PRESTADO FROM book LEFT JOIN loan on book.id = loan.id_book GROUP BY book.id";
+                $query = "SELECT book.*, count(loan.id_book) AS VECES_PRESTADO FROM book LEFT JOIN loan on book.id = loan.id_book GROUP BY book.id";
                 $result = mysqli_query(self::$myConnection, $query);
     
                 while($user = mysqli_fetch_assoc($result)){
@@ -399,6 +405,46 @@
             } catch (\Throwable $th) {
                 echo $th;
             }
+        }
+
+        public static function getAdminBooksByColumn($pFilter, $pKeyword){ //ARREGLAR CUANDO AL HAVING COUNT LE PASO UN 0!!!
+            self::connect();
+    
+            try {
+                $arrayUsers = array();
+                if($pFilter == "VECES_PRESTADO"){
+                    $query = "SELECT book.*, count(loan.id_book) AS VECES_PRESTADO FROM book LEFT JOIN loan on book.id = loan.id_book GROUP BY book.id HAVING VECES_PRESTADO = $pKeyword";
+                }
+                else{
+                    $query = "SELECT book.*, count(loan.id_book) AS VECES_PRESTADO FROM book LEFT JOIN loan on book.id = loan.id_book WHERE UPPER($pFilter) LIKE UPPER('%$pKeyword%') GROUP BY book.id";
+                }
+                $result = mysqli_query(self::$myConnection, $query);
+
+                while($user = mysqli_fetch_assoc($result)){
+                    $arrayUsers[] = $user;
+                }
+                return $arrayUsers;
+            } catch (\Throwable $th) {
+                return [];
+            }
+        }
+
+        public static function insertBook($pISBN, $pTitle, $pAuthor, $pPublisher, $pLanguage, $pGenre, $pYear, $pSynopsis, $pCover){
+            self::connect();
+
+            try {
+                $stmt = self::$myConnection->prepare("INSERT INTO book (isbn, title, author, publisher, language, genre, year, synopsis, cover) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt->bind_param("ssssssiss", $pISBN, $pTitle, $pAuthor, $pPublisher, $pLanguage, $pGenre, $pYear, $pSynopsis, $pCover);
+                
+                $insert = $stmt->execute();
+                
+                $stmt->close();
+
+                return $insert;
+            } catch (\Throwable $th) {
+                echo $th;
+                return false;
+            } 
         }
 
         public static function deleteAccount($pID){

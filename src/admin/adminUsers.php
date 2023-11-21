@@ -27,10 +27,7 @@
                 <input type="text" name="keyword" id="password" placeholder="Introduce las palabras clave">
                 <i class="fa-solid fa-magnifying-glass searchButton" id="bSimpleSearch""></i>
             </div>
-            <div class="avanzada" id="bAdvSearch">
-                <p>Añadir Usuario</p>
-                <i class="fa-solid fa-user-plus"></i>
-            </div>
+
         </div>
     </form>
     <div class="booksCont">
@@ -45,7 +42,7 @@
         <hr>
         <div class="books">
             <?php foreach ($users as $user) {?>
-                <a href="?ruta=singleBook&id=<?php echo $user["id"];?>" class="book">
+                <a href="?ruta=adminSingleUser&id=<?php echo $user["id"];?>" class="book">
                         <p><?php echo $user["nickname"]; ?></p>
                         <p><?php echo $user["name"]; ?></p>
                         <p><?php echo $user["email"]; ?></p>

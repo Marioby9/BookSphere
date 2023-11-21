@@ -82,6 +82,7 @@ main{
     border-radius: 10px;
     transition: background-color .2s;
     cursor: pointer;
+    
 }
 .avanzada:hover{
     background-color: #144d27;
@@ -89,6 +90,7 @@ main{
 }
 .avanzada p{
     font-size: small;
+    color: #fff;
 }
 .avanzada i{
     font-size: large;

@@ -64,8 +64,17 @@
                     else if($_GET["ruta"] == "adminUsers"){
                         include_once "./src/admin/adminUsers.php";
                     }
+                    else if($_GET["ruta"] == "adminSingleUser" && isset($_GET["id"])){
+                        include_once "./src/admin/adminSingleUser.php";
+                    }
                     else if($_GET["ruta"] == "adminBooks"){
                         include_once "./src/admin/adminBooks.php";
+                    }
+                    else if($_GET["ruta"] == "adminSingleBook" && isset($_GET["id"])){
+                        include_once "./src/admin/adminSingleBook.php";
+                    }
+                    else if($_GET["ruta"] == "adminAddBook"){
+                        include_once "./src/admin/adminAddBook.php";
                     }
                     else if($_GET["ruta"] == "adminProfile"){
                         include_once "./src/admin/adminProfile.php";
