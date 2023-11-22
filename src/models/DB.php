@@ -229,6 +229,7 @@
                 
             } catch (\Throwable $th) {
                 echo $th;
+                return false;
             }
         }
 
@@ -447,16 +448,50 @@
             } 
         }
 
-        public static function deleteAccount($pID){
+        public static function deleteBook($pID){
             self::connect();
             try {
-                $deleted = mysqli_query(self::$myConnection, "UPDATE user SET unsubscribe_date = CURDATE() WHERE id = $pID");
-                return $deleted;
+                mysqli_query(self::$myConnection, "DELETE from book WHERE id = $pID");
+                if (mysqli_affected_rows(self::$myConnection) > 0) {
+                    return true;  
+                } else {
+                    return false; 
+                }
             } catch (\Throwable $th) {
-                echo $th;
                 return false;
             }
         }
+
+        public static function deleteAccount($pID){
+            self::connect();
+            try {
+                mysqli_query(self::$myConnection, "UPDATE user SET unsubscribe_date = CURDATE() WHERE id = $pID");
+                if (mysqli_affected_rows(self::$myConnection) > 0) {
+                    return true;  
+                } else {
+                    return false; 
+                }
+            } catch (\Throwable $th) {
+                return false;
+            }
+        }
+
+        public static function restoreUser($pID){
+            self::connect();
+            try {
+                $restored = mysqli_query(self::$myConnection, "UPDATE user SET unsubscribe_date = NULL WHERE id = $pID");
+                if (mysqli_affected_rows(self::$myConnection) > 0) {
+                    return true;  
+                } else {
+                    return false; 
+                }
+            } catch (\Throwable $th) {
+                return false;
+            }
+        }
+
+
+
     }
 
 ?>

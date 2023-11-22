@@ -1,4 +1,7 @@
 <?php
+    include_once './src/models/DB.php';
+    include_once './src/components/Cards.inc.php';
+
     session_start();
     if(!isset($_SESSION["username"])){
         header("Location: ./src/auth/login.php"); 

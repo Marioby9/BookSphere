@@ -1,5 +1,4 @@
 <?php
-    include_once './src/models/DB.php';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["filter"]) && !empty($_POST["keyword"])) {
         $filter = $_POST["filter"];

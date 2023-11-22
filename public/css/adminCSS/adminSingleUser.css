@@ -105,13 +105,19 @@ form button{
 #btnEditBook{
     background-color: #89ac76;
 }
-#btnDeleteBook{
+#btnDeleteUser{
     background-color: rgb(255, 132, 132);
+}
+#btnRestoreUser{
+    background-color: #1db954;
 }
 #btnEditBook:hover{
     background-color: #ffffff;
 }
-#btnDeleteBook:hover{
+#btnDeleteUser:hover{
+    background-color: #ffffff;
+}
+#btnRestoreUser:hover{
     background-color: #ffffff;
 }
 .resumen{

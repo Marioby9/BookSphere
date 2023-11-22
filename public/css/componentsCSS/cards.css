@@ -1,0 +1,14 @@
+.CardsCard{
+    width: 100%;
+    color: black;
+}
+.CardsCard p{
+    margin: 20px;
+}
+.errorCard{
+    background-color: rgb(207, 78, 78);
+}
+.correctCard{
+    background-color: #89ac76;
+}
+

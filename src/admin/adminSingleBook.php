@@ -1,18 +1,23 @@
 <?php 
-    include_once './src/models/DB.php';
     $book = DB::getSingleBook($_GET["id"]);
     if(!$book){
         header("Location:".$_SERVER["PHP_SELF"]."?ruta=error404");
     }
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete"])) {
+        $deleted = DB::deleteBook($_GET["id"]);
+        if($deleted){
+            header("Location:".$_SERVER["PHP_SELF"]."?ruta=adminBooks");
+        }
     }
 
 ?>
 
 <main>
     <link rel="stylesheet" href="./public/css/adminCSS/adminSingleBook.css">
+    <?php if(isset($deleted) && !$deleted){
+        echo Cards::errorCard("No se ha conseguido borrar el libro");
+    } ?>
     <div class="container">
         <div class="titles">
                 <h1 class="title"> <?php echo $book["title"]; ?> </h1>
@@ -35,8 +40,8 @@
                     </div>
                     </div>
                 <div class="buttons">
-                    <form id="formLoanBook" action="<?php echo $_SERVER["PHP_SELF"]."?ruta=singleBook&id=".$book["id"];?>" method="post">
-                        <button id="btnDeleteBook" name="loan">Eliminar</button>
+                    <form id="formLoanBook" action="<?php echo $_SERVER["PHP_SELF"]."?ruta=adminSingleBook&id=".$book["id"];?>" method="post">
+                        <button id="btnDeleteBook" name="delete">Eliminar</button>
                     </form>
                 </div>
             </div>

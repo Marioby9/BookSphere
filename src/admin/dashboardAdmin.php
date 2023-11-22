@@ -1,5 +1,4 @@
 <?php 
-    include_once './src/models/DB.php';
     $mostPopularBooks = DB::getMostPopularBooks();
     $mostActiveUsers = DB::getMostActiveUsers();
     $lastUsers = DB::getLastUsers();

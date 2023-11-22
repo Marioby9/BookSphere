@@ -1,5 +1,4 @@
 <?php
-    include_once './src/models/DB.php';
     $uid = $_SESSION["id"];
     $totalUserLoans = DB::getTotalUserLoans($uid);
     $lastMonthLoans = DB::getLastMonthBooks($uid);

@@ -1,5 +1,4 @@
 <?php 
-    include_once './src/models/DB.php';
     $lastBooks = DB::getLastBooks();
     $mostPopularBooks = DB::getMostPopularBooks();
     $myLastLoans = DB::getMyLastLoans($_SESSION["id"]);

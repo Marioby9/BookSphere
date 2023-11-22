@@ -1,5 +1,4 @@
 <?php 
-    include_once './src/models/DB.php';
     $book = DB::getSingleBook($_GET["id"]);
     if(!$book){
         header("Location:".$_SERVER["PHP_SELF"]."?ruta=error404");

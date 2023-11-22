@@ -1,6 +1,4 @@
 <?php
-    include_once './src/models/DB.php';
-
     $favoriteBooks = DB::getFavoriteBooks($_SESSION["id"]);
     $currentlyReading = DB::getCurrentlyReading($_SESSION["id"]);
 
