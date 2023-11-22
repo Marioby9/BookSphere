@@ -91,7 +91,27 @@ main{
 form button{
     padding: 10px;
     width: 100%;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
 }
+.devolver{
+    background-color: rgb(255, 132, 132);
+}
+.devolver:hover{
+    background-color: #ffffff;
+}
+
+.alquilar{
+    background-color: #89ac76;
+}
+.alquilar:hover{
+    background-color: #ffffff;
+}
+
+
+
 .resumen{
     margin-top: 5px;
     height: 200px;

@@ -19,10 +19,6 @@
                         $synopsis = $_POST["synopsis"];
 
                         $inserted = DB::insertBook($isbn, $title, $author, $publisher, $language, $genre, $year, $synopsis, $cover);
-                        echo $inserted ? "Insertado" : "No insertado";
-                    }
-                    else{
-                        echo "campos no rellenos";
                     }
                 
             }
@@ -34,6 +30,17 @@
 
 <main>
     <link rel="stylesheet" href="./public/css/adminCSS/adminAddBook.css">
+    <?php if(isset($camposRellenos) && !$camposRellenos){
+        echo Cards::errorCard("Campos no rellenos. No se ha podido añadir");
+    } ?>
+    <?php if(isset($inserted)){
+            if($inserted){
+                echo Cards::correctCard("Libro añadido correctamente.");
+            }
+            else{
+                echo Cards::errorCard("Ha ocurrido un error inesperado al añadir el libro.");
+            }
+    } ?>
     <form class="container" action="<?php echo $_SERVER["PHP_SELF"]."?ruta=adminAddBook";?>" method="post" enctype="multipart/form-data">
         <div class="titles">
                 <h1 class="title"> Añadir Libro</h1>

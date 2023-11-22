@@ -6,17 +6,20 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete"])) {
         $deleted = DB::deleteBook($_GET["id"]);
-        if($deleted){
-            header("Location:".$_SERVER["PHP_SELF"]."?ruta=adminBooks");
-        }
+        header("Refresh: 1.5; URL=" . $_SERVER["PHP_SELF"] . "?ruta=adminBooks");
     }
 
 ?>
 
 <main>
     <link rel="stylesheet" href="./public/css/adminCSS/adminSingleBook.css">
-    <?php if(isset($deleted) && !$deleted){
-        echo Cards::errorCard("No se ha conseguido borrar el libro");
+    <?php if(isset($deleted)){
+            if($deleted){
+                echo Cards::correctCard("Libro eliminado correctamente.");
+            }
+            else{
+                echo Cards::errorCard("No se ha conseguido borrar el libro.");
+            }
     } ?>
     <div class="container">
         <div class="titles">

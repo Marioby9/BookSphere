@@ -107,9 +107,9 @@
                                 <p><?php echo ($book["end_loan"] ? $book["end_loan"] : "En curso"); ?></p>
                         </a>
                             <?php if($book["end_loan"]){ ?>
-                                <button class="return" name="reloan">realquilar</button>
+                                <button class="realquilar" name="reloan">realquilar</button>
                             <?php }else{ ?>
-                                <button class="return" name="return">devolver</button>
+                                <button class="devolver" name="return">devolver</button>
                             <?php } ?>
                     </div>
                     

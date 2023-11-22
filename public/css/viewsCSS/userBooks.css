@@ -378,20 +378,7 @@ main{
     width: 100%;
 }
 
-.return{
-    margin-right: 10px;
-    padding: 10px;
-    width: 100%;
-    background-color: #1ed760;
-    border: none;
-    border-radius: 10px;
-    font-size: medium;
-    font-weight: 600;
-    box-shadow: 0 0 4px rgb(255, 255, 255);
-}
-.return:hover{
-    background-color: #1eab4f;
-}
+
 
 .bookWithButton{
     display: flex;
@@ -402,4 +389,20 @@ main{
     width: 15%;
     height: 40px;
     cursor: pointer;
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 10px;
+    transition: all 0.3s;
+    margin-right: 10px;
+}
+
+.devolver{
+    background-color: rgb(255, 132, 132);
+}
+.realquilar{
+    background-color: #89ac76;
+}
+
+.bookWithButton button:hover{
+    background-color: #ffffff;
 }

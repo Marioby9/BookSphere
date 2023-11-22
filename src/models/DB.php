@@ -256,7 +256,6 @@
                 $updateBook = mysqli_query(self::$myConnection, "UPDATE book SET available = true WHERE id = ". $bookID);
                 return ($updateLoan && $updateBook);
             } catch (\Throwable $th) {
-                echo $th;
                 return false;
             }
         }
