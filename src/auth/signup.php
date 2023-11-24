@@ -1,5 +1,6 @@
 <?php
 include_once "../models/DB.php";
+include_once "../models/regex.php";
 
 session_start();
 if(isset($_SESSION["username"])){
@@ -19,20 +20,26 @@ if (isset($_POST["signup"])) {
     $errorInsert = false;
     $errorPassword = false;
     $errorCampo = false;
+    $errorCorreo = false;
     $anyEmptyField = empty($name) || empty($ape1) ||empty($ape2) || empty($username) || empty($email) || empty($password); 
 
     if(!$anyEmptyField){
-        if($password == $confPassword){
-            $inserted = DB::insertUser($name, $ape1, $ape2, $username, $email, $password);
-            if($inserted){
-                header("Location: ./login.php");
+        if(validarCorreo($email)){
+            if($password == $confPassword){
+                $inserted = DB::insertUser($name, $ape1, $ape2, $username, $email, $password);
+                if($inserted){
+                    header("Location: ./login.php");
+                }
+                else{
+                    $errorInsert = true;
+                }
             }
             else{
-                $errorInsert = true;
+                $errorPassword = true;
             }
         }
         else{
-            $errorPassword = true;
+            $errorCorreo = true;
         }
     }
     else{
@@ -64,6 +71,9 @@ if (isset($_POST["signup"])) {
             <?php } ?>
             <?php if(isset($errorPassword) && $errorPassword) { ?>
                 <h2 class="error">Error, las contraseñas no coinciden</h2>
+            <?php } ?>
+            <?php if(isset($errorCorreo) && $errorCorreo) { ?>
+                <h2 class="error">Error, el correo no es válido</h2>
             <?php } ?>
             <?php if(isset($errorInsert) && $errorInsert) { ?>
                 <h2 class="error">Ha ocurrido un error inesperado</h2>
