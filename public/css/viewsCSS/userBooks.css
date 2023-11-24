@@ -385,15 +385,19 @@ main{
     align-items: center;
     gap: 10px;
 }
-.bookWithButton button{
+.bookWithButton form{
     width: 15%;
+    margin-right: 10px;
+}
+.bookWithButton button{
+    width: 100%;
     height: 40px;
     cursor: pointer;
     border-radius: 10px;
     font-weight: 600;
     padding: 10px;
     transition: all 0.3s;
-    margin-right: 10px;
+    
 }
 
 .devolver{

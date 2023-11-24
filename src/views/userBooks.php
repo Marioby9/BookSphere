@@ -2,13 +2,31 @@
     $favoriteBooks = DB::getFavoriteBooks($_SESSION["id"]);
     $currentlyReading = DB::getCurrentlyReading($_SESSION["id"]);
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["filter"]) && !empty($_POST["keyword"])) {
-        $filter = $_POST["filter"];
-        $keyword = $_POST["keyword"]; 
-        $books = DB::getBookByColumn($filter, $keyword);
-    } else {
+    if($_SERVER["REQUEST_METHOD"]=="POST"){
+        if(!empty($_POST["filter"]) && !empty($_POST["keyword"])){
+            $filter = $_POST["filter"];
+            $keyword = $_POST["keyword"]; 
+            $books = DB::getUserBookByColumn($_SESSION["id"] ,$filter, $keyword);
+        }
+        else{
+            $books = DB::getAllMyBooks($_SESSION["id"]);
+        }
+
+        if (isset($_POST["reloan"])) {
+            $bookId = $_POST["book_id"];
+            DB::insertLoan($_SESSION["id"], $bookId);
+            header("Refresh: 0.2");
+        } else if (isset($_POST["return"])) {
+            $bookId = $_POST["book_id"];
+            DB::finishLoan($_SESSION["id"], $bookId); //FUNCIONA BIEN
+            header("Refresh: 0.2");
+        }
+
+    }
+    else{
         $books = DB::getAllMyBooks($_SESSION["id"]);
     }
+
 ?>
 
 <main>
@@ -107,9 +125,15 @@
                                 <p><?php echo ($book["end_loan"] ? $book["end_loan"] : "En curso"); ?></p>
                         </a>
                             <?php if($book["end_loan"]){ ?>
-                                <button class="realquilar" name="reloan">realquilar</button>
+                                <form id="simpleForm" action="<?php echo $_SERVER["PHP_SELF"]."?ruta=userBooks"; ?>" method="post">
+                                    <input type="hidden" name="book_id" value="<?php echo $book["id_book"]; ?>">
+                                    <button class="realquilar" name="reloan">realquilar</button>
+                                </form>
                             <?php }else{ ?>
-                                <button class="devolver" name="return">devolver</button>
+                                <form id="simpleForm" action="<?php echo $_SERVER["PHP_SELF"]."?ruta=userBooks"; ?>" method="post">
+                                    <input type="hidden" name="book_id" value="<?php echo $book["id_book"]; ?>">
+                                    <button class="devolver" name="return">devolver</button>
+                                </form>
                             <?php } ?>
                     </div>
                     

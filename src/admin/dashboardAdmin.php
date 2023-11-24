@@ -12,7 +12,7 @@
             <p class="sectionTitle">Los últimos usuarios registrados</p>
             <div class="users">
             <?php foreach ($lastUsers as $user) {?>
-                <a href="?ruta=singleBook&id=<?php echo $user["id"];?>">
+                <a href="?ruta=adminSingleUser&id=<?php echo $user["id"];?>">
                     <div class="user">
                         <i class="bookIcon fa-solid fa-user"></i>
                         <div class="data">
@@ -59,7 +59,7 @@
     <section class="right">
         <aside class="aside">
             <p class="sectionTitle">Los libros con más éxito</p>
-            <a href="?ruta=singleBook&id=<?php echo $mostPopularBooks[0]["id"];?>">
+            <a href="?ruta=adminSingleBook&id=<?php echo $mostPopularBooks[0]["id"];?>">
                 <div class="topBookCard">
                     <img class="topBookCover" src="data:image/jpg;base64,<?php echo base64_encode($mostPopularBooks[0]["cover"]) ?>" alt="NO HAY IMAGEN">
                     <div class="topBookContent center">

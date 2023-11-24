@@ -13,6 +13,7 @@
 
         //
 
+        //CONECTAR
         public static function connect(){
             try {
                 self::$myConnection = mysqli_connect(HOST, USER_DB, PASSWORD_DB, NAME_DB); 
@@ -22,13 +23,18 @@
             }
         }
         
-
+        //CERRAR
         public static function close(){
-            self::connect();
-            return mysqli_close(self::$myConnection);
+            try {
+                self::connect();
+                return mysqli_close(self::$myConnection);
+            } catch (\Throwable $th) {
+                return false;
+            }
+            
         }
-
     
+        //INSERTA USUARIO
         public static function insertUser($pName, $pLast1, $pLast2, $pNickname, $pEmail, $pPassword, $pRol = "user"){
             self::connect();
             try {
@@ -40,7 +46,7 @@
             } 
         }
 
-
+        //OBTEN USUARIO LOGIN
         public static function getUser($pNickname, $pPassword){
             self::connect();
             try {
@@ -59,48 +65,66 @@
             }
         }
 
-
+        //OBTENER TODOS LOS LIBROS
         public static function getAllBooks(){
-            self::connect();
-            $arrayBooks = array();
-            $result = mysqli_query(self::$myConnection, "SELECT * FROM book");
+            
+            try {
+                self::connect();
+                $arrayBooks = array();
+                $result = mysqli_query(self::$myConnection, "SELECT * FROM book");
 
-            while($book = mysqli_fetch_assoc($result)){
-                $arrayBooks[] = $book;
+                while($book = mysqli_fetch_assoc($result)){
+                    $arrayBooks[] = $book;
+                }
+                return $arrayBooks;
+            } catch (\Throwable $th) {
+                return [];
             }
-            return $arrayBooks;
+            
         }
 
-
+        //OBTENER 3 ULTIMOS LIBROS AÑADIDOS A LA BBDD (ULTIMOS IDS)
         public static function getLastBooks(){
-            self::connect();
-            $arrayBooks = array();
-            $result = mysqli_query(self::$myConnection, "SELECT * FROM book ORDER BY ID DESC LIMIT 3");
+            try {
+                self::connect();
+                $arrayBooks = array();
+                $result = mysqli_query(self::$myConnection, "SELECT * FROM book ORDER BY ID DESC LIMIT 3");
 
-            while($book = mysqli_fetch_assoc($result)){
-                $arrayBooks[] = $book;
+                while($book = mysqli_fetch_assoc($result)){
+                    $arrayBooks[] = $book;
+                }
+                return $arrayBooks;
+            } catch (\Throwable $th) {
+                return [];
             }
-            return $arrayBooks;
+
+            
         }
 
+        //OBTENER LOS 3 LIBROS CON MAS PRESTAMOS
         public static function getMostPopularBooks(){
-            self::connect();
+            try {
+                self::connect();
 
-            $arrayBooks = array();
-            $query = "SELECT book.*, COUNT(loan.id_book) AS numLoans
-            FROM book
-            JOIN loan ON book.id = loan.id_book
-            GROUP BY book.id
-            ORDER BY numLoans DESC
-            LIMIT 3";
-            $result = mysqli_query(self::$myConnection, $query);
+                $arrayBooks = array();
+                $query = "SELECT book.*, COUNT(loan.id_book) AS numLoans
+                FROM book
+                JOIN loan ON book.id = loan.id_book
+                GROUP BY book.id
+                ORDER BY numLoans DESC
+                LIMIT 3";
+                $result = mysqli_query(self::$myConnection, $query);
 
-            while($book = mysqli_fetch_assoc($result)){
-                $arrayBooks[] = $book;
+                while($book = mysqli_fetch_assoc($result)){
+                    $arrayBooks[] = $book;
+                }
+                return $arrayBooks;
+            } catch (\Throwable $th) {
+                return [];
             }
-            return $arrayBooks;
         }
 
+        //OBTENER LOS ULTIMOS LIBROS ALQUILADOS POR EL USUARIO
         public static function getMyLastLoans($userID){
             self::connect();
 
@@ -124,6 +148,7 @@
             
         }
 
+        //OBTENER TODOS LOS LIBROS DEL USUARIO
         public static function getAllMyBooks($userID){
             self::connect();
 
@@ -146,6 +171,7 @@
             }
         }
 
+        //OBTENER LOS LIBROS QUE ESTÁ LEYENDO ACTUALMENTE
         public static function getCurrentlyReading($userID){
             self::connect();
 
@@ -168,6 +194,7 @@
             }
         }
 
+        //OBTENER LIBROS FAVORITOS
         public static function getFavoriteBooks($userID){
             self::connect();
 
@@ -190,29 +217,64 @@
             }
         }
 
-        public static function getBookByColumn($column, $value){
+        //OBTENER LIBROS DEL USUARIO POR COLUMNA
+        public static function getUserBookByColumn($userID, $column, $value){
             self::connect();
-            $arrayBooks = array();
-            $result = mysqli_query(self::$myConnection, "SELECT * FROM book WHERE UPPER($column) LIKE UPPER('%$value%')");
-            if($result){
+
+            try {
+                $arrayBooks = array();
+                $query = "SELECT book.*, loan.*
+                FROM book
+                JOIN loan ON book.id = loan.id_book
+                WHERE ID_USER = $userID AND UPPER($column) LIKE UPPER('%$value%')
+                GROUP BY book.id
+                ORDER BY loan.end_loan";
+                $result = mysqli_query(self::$myConnection, $query);
+
                 while($book = mysqli_fetch_assoc($result)){
                     $arrayBooks[] = $book;
                 }
                 return $arrayBooks;
+            } catch (\Throwable $th) {
+                echo $th;
+                return [];
             }
-            else{
-                return false;
+        }
+
+        //OBTENER LIBROS POR COLUMNA
+        public static function getBookByColumn($column, $value){
+            try {
+                self::connect();
+                $arrayBooks = array();
+                $result = mysqli_query(self::$myConnection, "SELECT * FROM book WHERE UPPER($column) LIKE UPPER('%$value%')");
+                if($result){
+                    while($book = mysqli_fetch_assoc($result)){
+                        $arrayBooks[] = $book;
+                    }
+                    return $arrayBooks;
+                }
+                else{
+                    return [];
+                }
+            } catch (\Throwable $th) {
+                return [];
             }
             
         }
 
+        //OBTENER UN LIBRO CONCRETO
         public static function getSingleBook($id){
-            self::connect();
-            $result = mysqli_query(self::$myConnection, "SELECT * FROM book WHERE ID = $id");
-            $book = mysqli_fetch_assoc($result);
-            return $book;
+            try {
+                self::connect();
+                $result = mysqli_query(self::$myConnection, "SELECT * FROM book WHERE ID = $id");
+                $book = mysqli_fetch_assoc($result);
+                return $book;
+            } catch (\Throwable $th) {
+                return false;
+            }
         }
 
+        //OBTENER UNICO USUARIO POR ID
         public static function getSingleUser($id) {
             self::connect();
 
@@ -233,6 +295,7 @@
             }
         }
 
+        //ALQUILAR LIBRO
         public static function insertLoan($userID, $bookID){
             self::connect();
             try {
@@ -245,10 +308,12 @@
                     return false;
                 }
             } catch (\Throwable $th) {
+                echo $th;
                 return false;
             } 
         }
 
+        //DEVOLVER LIBRO
         public static function finishLoan($userID, $bookID){
             self::connect();
             try {
@@ -256,10 +321,12 @@
                 $updateBook = mysqli_query(self::$myConnection, "UPDATE book SET available = true WHERE id = ". $bookID);
                 return ($updateLoan && $updateBook);
             } catch (\Throwable $th) {
+                echo $th;
                 return false;
             }
         }
 
+        //SABER SI ES UN LIBRO DEL USUARIO
         public static function isMyBook($userID, $bookID){
             self::connect();
             try {
@@ -271,7 +338,7 @@
             }
         }
 
-
+        //OBTENER TOTAL LIBROS ALQUILADOS POR EL USUARIO
         public static function getTotalUserLoans($pID){
             self::connect();
             try {
@@ -284,6 +351,7 @@
             }
         }
 
+        //OBTENER LOS ULTIMOS LIBROS LEIDOS EL ULTIMO MES
         public static function getLastMonthBooks($pID){
             self::connect();
             $currentDate = date("Y-m-d");
@@ -298,6 +366,7 @@
             }
         }
 
+        //OBTENER LIBROS 
         public static function getFavoriteUserGenre($pID){
             self::connect();
             try {
@@ -488,7 +557,6 @@
                 return false;
             }
         }
-
 
 
     }
