@@ -2,10 +2,10 @@
 
 <br />
 <div align="center">
-  <h2 align="center">BookSphere</h3>
+  <h1 align="center">BookSphere</h1>
 
   <p align="center">
-    Un README impresionante para darle un impulso a tus proyectos bibliotecarios ¡Bienvenido a una experiencia de desarrollo extraordinaria!
+    Una página web gestora para tu bilbioteca. 
   </p>
 </div>
 
@@ -14,7 +14,7 @@
   <summary>Tabla de contenido</summary>
   <ol>
     <li>
-      <a href="#empezamos">Empezamos</a>
+      <a href="#resumen">Resumen</a>
       <ul>
         <li><a href="#características-principales">Características Principales<a></li>
       </ul>
@@ -30,7 +30,7 @@
 
 <!-- EMPEZAMOS -->
 
-## Empezamos
+## Resumen
 
 Bienvenido a nuestra biblioteca online en PHP, un proyecto diseñado para ofrecer una plataforma eficiente y fácil de usar para gestionar y compartir recursos bibliográficos. En nuestra biblioteca online, los usuarios pueden explorar una amplia variedad de libros, revistas y otros materiales, así como realizar funciones como búsqueda, préstamo y devolución de libros.
 

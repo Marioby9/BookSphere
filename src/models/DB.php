@@ -397,7 +397,8 @@
                 $arrayUsers = array();
                 $query = "SELECT *
                 FROM user
-                ORDER BY signup_date DESC";
+                ORDER BY signup_date DESC
+                LIMIT 5";
                 $result = mysqli_query(self::$myConnection, $query);
 
                 while($user = mysqli_fetch_assoc($result)){
