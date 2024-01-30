@@ -151,9 +151,13 @@ Sigue estos pasos para configurar el proyecto en tu entorno local:
    - Reinicia el servidor Apache desde el panel de control de XAMPP o usando los comandos apropiados para tu sistema.
 
 9. **Acceso al Usuario de Prueba:**
-   - Utiliza el siguiente usuario de prueba para acceder a la aplicación:
-     - Correo electronico: `booknexus@radis.dev`
-     - Contraseña: `Passw0rd`
+   - Utiliza el siguiente usuario de prueba para acceder a la aplicación como cliente:
+     - Nombre usuario: `mariomg`
+     - Contraseña: `mariomg`
+
+   - Utiliza el siguiente usuario de prueba para acceder a la aplicación como administrador:
+     - Nombre usuario: `ADMIN`
+     - Contraseña: `ADMIN`
 
 Ahora deberías poder acceder a tu proyecto a través de [http://tudnslocal.com](http://tudnslocal.com) en tu navegador. Asegúrate de que las variables en los archivos de configuración estén configuradas correctamente y que las tablas y datos de prueba se hayan creado con éxito.
 
