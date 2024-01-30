@@ -2,8 +2,8 @@
 
 <br />
 <div align="center">
-  <h1 align="center">BookSphere</h1>
-
+  <img src="./public/img/logos/fullWhiteLogo.png"/>
+  <br><br>
   <p align="center">
     Una página web gestora para tu bilbioteca. 
   </p>
